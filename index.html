@@ -5,148 +5,82 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>LAW INTERNATIONAL SCHOOL</title>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#f1f5f9;
- color:#172033
-}
-button{
- border:0;
- border-radius:8px;
- padding:10px 15px;
- font-weight:bold;
- cursor:pointer;
-}
-input,select,textarea{
- width:100%;
- padding:11px;
- margin:6px 0 12px;
- border:1px solid #cbd5e1;
- border-radius:8px;
-}
-.login{
- min-height:100vh;
- display:flex;
- align-items:center;
- justify-content:center;
- background:linear-gradient(135deg,#07152f,#2563eb);
- padding:20px;
-}
-.loginbox{
- background:white;
- width:420px;
- max-width:100%;
- padding:30px;
- border-radius:20px;
- box-shadow:0 20px 60px #0005
-}
-.logo{
- width:75px;height:75px;
- border-radius:50%;
- background:#2563eb;
- color:white;
- margin:auto;
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:30px;
- font-weight:bold;
-}
-.login h1{text-align:center;font-size:25px}
-.sub{text-align:center;color:#64748b}
-.role{
- display:flex;
- gap:10px;
- margin:15px 0
-}
-.role button{flex:1;background:#e2e8f0}
-.role button.active{background:#2563eb;color:white}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172033}
+button{border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer}
+input,select,textarea{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:8px;margin:6px 0 14px}
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#07152f,#2563eb);padding:20px}
+.loginbox{background:white;width:410px;padding:35px;border-radius:22px;box-shadow:0 20px 60px #0005}
+.logo{width:75px;height:75px;border-radius:50%;background:#2563eb;color:white;margin:auto;display:flex;align-items:center;justify-content:center;font-size:35px}
+.loginbox h1{text-align:center;font-size:23px}
+.sub{text-align:center;color:#64748b;margin-bottom:25px}
+.loginbox button{width:100%;background:#2563eb;color:white}
+.error{display:none;color:#dc2626;background:#fee2e2;padding:10px;margin-top:12px;border-radius:8px;text-align:center}
+
 .app{display:none}
-.sidebar{
- position:fixed;
- left:0;top:0;
- width:240px;
- height:100vh;
- background:#07152f;
- color:white;
- padding:20px;
- overflow:auto
-}
-.sidebar h2{text-align:center}
-.sidebar button{
- width:100%;
- margin:5px 0;
- text-align:left;
- background:#13264b;
- color:white
-}
-.main{
- margin-left:240px;
- padding:25px
-}
-.top{
- display:flex;
- justify-content:space-between;
- align-items:center;
- flex-wrap:wrap;
- gap:10px
-}
-.cardgrid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
- gap:15px;
- margin:20px 0
-}
-.card{
- background:white;
- padding:20px;
- border-radius:15px;
- box-shadow:0 3px 15px #0001
-}
-.card h3{margin:0;color:#64748b}
-.card strong{font-size:25px}
-.panel{
- background:white;
- padding:20px;
- border-radius:15px;
- margin:15px 0;
- box-shadow:0 3px 15px #0001
-}
-table{
- width:100%;
- border-collapse:collapse;
- background:white
-}
-th,td{
- padding:10px;
- border-bottom:1px solid #e2e8f0;
- text-align:left
-}
+.sidebar{position:fixed;left:0;top:0;width:245px;height:100vh;background:#0f172a;color:white;padding:20px;overflow:auto}
+.sidebar h2{text-align:center;font-size:18px}
+.small{text-align:center;color:#94a3b8;font-size:11px;margin-bottom:25px}
+.nav{display:block;width:100%;background:transparent;color:#cbd5e1;text-align:left;margin:4px 0}
+.nav:hover,.nav.active{background:#2563eb;color:white}
+.logout{background:#dc2626!important;color:white!important;margin-top:20px}
+
+.main{margin-left:245px;padding:22px}
+.top{background:white;padding:18px;border-radius:13px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
+.profile{background:#eff6ff;color:#1d4ed8;padding:10px 14px;border-radius:9px;font-weight:bold}
+
+.section{display:none}
+.section.active{display:block}
+.panel{background:white;padding:20px;border-radius:14px;margin-bottom:20px;box-shadow:0 2px 10px #0001}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.card{background:white;padding:20px;border-radius:13px;box-shadow:0 2px 10px #0001}
+.card h4{color:#64748b;margin:0 0 10px}
+.card strong{font-size:27px}
+
+.primary{background:#2563eb;color:white}
+.green{background:#16a34a;color:white}
+.red{background:#dc2626;color:white}
+.orange{background:#ea580c;color:white}
+.gray{background:#475569;color:white}
+.yellow{background:#f59e0b;color:white}
+
+table{width:100%;border-collapse:collapse;margin-top:15px}
+th,td{padding:11px;border-bottom:1px solid #e2e8f0;text-align:left}
 th{background:#eff6ff}
-.present{background:#dcfce7!important;color:#166534}
-.absent{background:#fee2e2!important;color:#991b1b}
-.small{font-size:13px;color:#64748b}
-.hide{display:none!important}
-.success{color:#15803d}
-.danger{color:#dc2626}
-.notice{
- padding:15px;
- border-left:5px solid #2563eb;
- background:#eff6ff;
- margin:10px 0;
- border-radius:8px
+
+.actions{display:flex;gap:5px;flex-wrap:wrap}
+.edit{background:#f59e0b;color:white}
+.delete{background:#dc2626;color:white}
+
+.attbtn{padding:9px 13px;margin:2px}
+.present{background:#dcfce7;color:#15803d}
+.present.selected{background:#16a34a;color:white}
+.absent{background:#fee2e2;color:#dc2626}
+.absent.selected{background:#dc2626;color:white}
+
+.notice{padding:17px;border:1px solid #e2e8f0;border-radius:10px;margin:10px 0}
+.notice img{max-width:100%;max-height:280px;margin-top:10px;border-radius:8px}
+
+.teacherbox{background:#eff6ff;padding:18px;border-radius:12px;margin-bottom:18px}
+.teacherbox h2{margin:0 0 7px;color:#1d4ed8}
+
+.receipt{
+background:white;width:750px;max-width:100%;margin:auto;
+padding:30px;border:2px solid #111
 }
-@media(max-width:700px){
- .sidebar{position:relative;width:100%;height:auto}
- .main{margin-left:0}
+.receipt-head{text-align:center;border-bottom:2px solid #111;padding-bottom:15px}
+.receipt-head h1{margin:0}
+.receipt-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed #aaa}
+.receipt-total{font-size:20px;font-weight:bold}
+.no-print{margin-bottom:20px}
+
+@media(max-width:850px){
+.sidebar{position:relative;width:100%;height:auto}
+.main{margin-left:0}
+.cards{grid-template-columns:1fr 1fr}
+.grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -154,99 +88,109 @@ th{background:#eff6ff}
 <body>
 
 <!-- LOGIN -->
-<div id="loginPage" class="login">
+
+<div class="login" id="loginPage">
 <div class="loginbox">
 
-<div class="logo">LAW</div>
+<div class="logo">🏫</div>
 
 <h1>LAW INTERNATIONAL SCHOOL</h1>
-<p class="sub">School Management System</p>
+<div class="sub">School Management System</div>
 
-<div class="role">
-<button id="principalBtn" class="active" onclick="setRole('principal')">
-Principal
-</button>
-<button id="teacherBtn" onclick="setRole('teacher')">
-Teacher
-</button>
+<label>Login As</label>
+<select id="loginRole">
+<option value="principal">👨‍💼 Principal</option>
+<option value="teacher">👩‍🏫 Teacher</option>
+</select>
+
+<label>ID</label>
+<input id="loginUser" placeholder="Enter ID">
+
+<label>Password</label>
+<input id="loginPass" type="password" placeholder="Enter Password">
+
+<button onclick="login()">LOGIN</button>
+
+<div class="error" id="loginError">
+Wrong ID / Password
 </div>
 
-<input id="loginEmail" type="email" placeholder="Email / ID">
-<input id="loginPassword" type="password" placeholder="Password">
-
-<button onclick="login()" style="width:100%;background:#2563eb;color:white">
-LOGIN
-</button>
-
-<p id="loginMsg" class="danger"></p>
-
 </div>
 </div>
 
 
-<!-- APPLICATION -->
-<div id="app" class="app">
+<!-- APP -->
 
-<div class="sidebar">
+<div class="app" id="app">
 
-<h2>LAW SCHOOL</h2>
-<p id="sideUser" style="text-align:center"></p>
+<aside class="sidebar">
 
-<button onclick="showPage('dashboard')">🏠 Dashboard</button>
+<h2>🏫 LAW INTERNATIONAL</h2>
+<div class="small">SCHOOL MANAGEMENT SYSTEM</div>
 
-<div id="adminMenu">
-<button onclick="showPage('students')">👨‍🎓 Students</button>
-<button onclick="showPage('teachers')">👩‍🏫 Teachers</button>
-<button onclick="showPage('fees')">💰 Fees</button>
-<button onclick="showPage('notices')">📢 Notice Board</button>
-</div>
+<div id="principalMenu">
 
-<div id="teacherMenu" class="hide">
-<button onclick="showPage('attendance')">✅ Attendance</button>
-<button onclick="showPage('history')">📅 Attendance History</button>
-</div>
-
-<button onclick="logout()">🚪 Logout</button>
+<button class="nav active" onclick="showSection('dashboard',this)">🏠 Dashboard</button>
+<button class="nav" onclick="showSection('students',this)">👨‍🎓 Students</button>
+<button class="nav" onclick="showSection('teachers',this)">👩‍🏫 Teachers</button>
+<button class="nav" onclick="showSection('attendance',this)">📅 Attendance</button>
+<button class="nav" onclick="showSection('fees',this)">💰 Fees</button>
+<button class="nav" onclick="showSection('feeRecords',this)">🧾 Fee Records</button>
+<button class="nav" onclick="showSection('notices',this)">📢 Notice Board</button>
 
 </div>
 
-<div class="main">
+<div id="teacherMenu" style="display:none">
+
+<button class="nav active" onclick="showSection('teacherAttendance',this)">📅 Attendance</button>
+<button class="nav" onclick="showSection('teacherReport',this)">📊 Attendance Report</button>
+<button class="nav" onclick="showSection('teacherNotices',this)">📢 Notice Board</button>
+
+</div>
+
+<button class="nav logout" onclick="logout()">🚪 Logout</button>
+
+</aside>
+
+
+<main class="main">
 
 <div class="top">
-<h1 id="pageTitle">Dashboard</h1>
-<span id="today"></span>
+<h2 id="pageTitle">Dashboard</h2>
+<div class="profile" id="profile">PRINCIPAL</div>
 </div>
 
 
 <!-- DASHBOARD -->
-<section id="dashboard" class="page">
 
-<div class="cardgrid">
+<section class="section active" id="dashboard">
 
-<div class="card">
-<h3>💰 TOTAL DUES</h3>
-<strong id="totalDues">₹0</strong>
-</div>
+<div class="cards">
 
 <div class="card">
-<h3>💵 TOTAL PAID</h3>
-<strong id="totalPaid">₹0</strong>
-</div>
-
-<div class="card">
-<h3>📅 TODAY</h3>
-<strong id="todayCard">--</strong>
-</div>
-
-<div class="card">
-<h3>👨‍🎓 STUDENTS</h3>
+<h4>Total Students</h4>
 <strong id="studentCount">0</strong>
+</div>
+
+<div class="card">
+<h4>Total Teachers</h4>
+<strong id="teacherCount">0</strong>
+</div>
+
+<div class="card">
+<h4>Present Today</h4>
+<strong id="presentCount">0</strong>
+</div>
+
+<div class="card">
+<h4>Total Dues</h4>
+<strong id="duesCount">₹0</strong>
 </div>
 
 </div>
 
 <div class="panel">
-<h2>📢 Notice Board</h2>
+<h2>📢 Latest Notices</h2>
 <div id="dashboardNotices"></div>
 </div>
 
@@ -254,1279 +198,2121 @@ LOGIN
 
 
 <!-- STUDENTS -->
-<section id="students" class="page hide">
+
+<section class="section" id="students">
 
 <div class="panel">
-<h2>Add Student</h2>
 
-<input id="studentName" placeholder="Student Name">
+<h2>➕ Add Student</h2>
 
-<input id="studentRoll" placeholder="Roll Number">
+<div class="grid">
 
-<select id="studentClass">
+<div>
+<label>Student ID</label>
+<input id="sid">
+</div>
+
+<div>
+<label>Student Name</label>
+<input id="sname">
+</div>
+
+<div>
+<label>Class</label>
+<select id="sclass">
 <option value="">Select Class</option>
-<option>Nursery</option>
-<option>LKG</option>
-<option>UKG</option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-<option>11</option>
-<option>12</option>
+<option>Nursery</option><option>LKG</option><option>UKG</option>
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option><option>6</option>
+<option>7</option><option>8</option><option>9</option>
+<option>10</option><option>11</option><option>12</option>
 </select>
+</div>
 
-<input id="studentParent" placeholder="Parent Name">
+<div>
+<label>Section</label>
+<select id="ssection">
+<option value="">Select Section</option>
+<option>A</option><option>B</option><option>C</option><option>D</option>
+</select>
+</div>
 
-<input id="studentPhone" placeholder="Parent Mobile">
+<div>
+<label>Father Name</label>
+<input id="sfather">
+</div>
 
-<input id="studentFee" type="number" placeholder="Monthly Fee">
+<div>
+<label>Phone</label>
+<input id="sphone">
+</div>
 
-<button onclick="addStudent()" style="background:#2563eb;color:white">
-ADD STUDENT
-</button>
+</div>
+
+<button class="primary" onclick="addStudent()">➕ ADD STUDENT</button>
 
 </div>
 
 <div class="panel">
-<h2>Student List</h2>
-<div id="studentTable"></div>
+
+<h2>👨‍🎓 Student List</h2>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Class</th>
+<th>Section</th>
+<th>Father</th>
+<th>Phone</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="studentTable"></tbody>
+</table>
+
 </div>
 
 </section>
 
 
 <!-- TEACHERS -->
-<section id="teachers" class="page hide">
+
+<section class="section" id="teachers">
 
 <div class="panel">
 
-<h2>Create Teacher Login</h2>
+<h2>👩‍🏫 Create Teacher Login</h2>
 
-<input id="teacherName" placeholder="Teacher Name">
+<div class="grid">
 
-<input id="teacherSubject" placeholder="Subject">
+<div>
+<label>Teacher Name</label>
+<input id="tname">
+</div>
 
-<select id="teacherClass">
-<option value="">Class</option>
-<option>Nursery</option>
-<option>LKG</option>
-<option>UKG</option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-<option>11</option>
-<option>12</option>
-</select>
+<div>
+<label>Subject</label>
+<input id="tsubject">
+</div>
 
-<input id="teacherEmail" type="email" placeholder="Teacher Email / ID">
+<div>
+<label>Login ID</label>
+<input id="tid">
+</div>
 
-<input id="teacherPassword" type="password" placeholder="Password">
+<div>
+<label>Password</label>
+<input id="tpassword">
+</div>
 
-<button onclick="createTeacher()" style="background:#2563eb;color:white">
-CREATE TEACHER
-</button>
+</div>
 
-<p class="small">
-Principal teacher ki ID aur password khud banayega.
-</p>
+<button class="primary" onclick="addTeacher()">CREATE TEACHER LOGIN</button>
 
 </div>
 
 <div class="panel">
-<h2>Teachers</h2>
-<div id="teacherTable"></div>
+
+<h2>Teacher Accounts</h2>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Subject</th>
+<th>Login ID</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="teacherTable"></tbody>
+</table>
+
+</div>
+
+</section>
+
+
+<!-- ADMIN ATTENDANCE -->
+
+<section class="section" id="attendance">
+
+<div class="panel">
+
+<h2>📅 Attendance History</h2>
+
+<div class="grid">
+
+<div>
+<label>Class</label>
+<select id="adminClass" onchange="adminAttendance()">
+<option value="">Select Class</option>
+<option>Nursery</option><option>LKG</option><option>UKG</option>
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option><option>6</option>
+<option>7</option><option>8</option><option>9</option>
+<option>10</option><option>11</option><option>12</option>
+</select>
+</div>
+
+<div>
+<label>Section</label>
+<select id="adminSection" onchange="adminAttendance()">
+<option value="">Select Section</option>
+<option>A</option><option>B</option><option>C</option><option>D</option>
+</select>
+</div>
+
+<div>
+<label>Date</label>
+<input type="date" id="adminDate" onchange="adminAttendance()">
+</div>
+
+</div>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Student</th>
+<th>Class</th>
+<th>Section</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="adminAttendanceTable"></tbody>
+</table>
+
 </div>
 
 </section>
 
 
 <!-- FEES -->
-<section id="fees" class="page hide">
+
+<section class="section" id="fees">
 
 <div class="panel">
 
-<h2>Fee Payment</h2>
+<h2>💰 Student Fee Setup</h2>
 
-<select id="feeStudent" onchange="loadFeeStudent()">
-<option value="">Select Student</option>
-</select>
+<div class="grid">
 
-<div id="feeInfo"></div>
+<div>
+<label>Select Student</label>
+<select id="feeStudent"></select>
+</div>
 
-<input id="payAmount" type="number" placeholder="Payment Amount">
+<div>
+<label>Monthly Fee</label>
+<input type="number" id="monthlyFee" placeholder="Example 1000">
+</div>
 
-<select id="payMode">
-<option value="Cash">Cash</option>
-<option value="Online">Online</option>
-</select>
+<div>
+<label>Initial Paid Amount</label>
+<input type="number" id="initialPaid" value="0">
+</div>
 
-<input id="utr" placeholder="UTR Number (Online only)">
+<div>
+<label>Fee Start Date</label>
+<input type="date" id="feeStartDate">
+</div>
 
-<button onclick="payFee()" style="background:#16a34a;color:white">
-💵 SAVE PAYMENT
+</div>
+
+<button class="primary" onclick="saveFeeSetup()">
+💾 SAVE FEE SETUP
 </button>
 
 </div>
 
+
 <div class="panel">
-<h2>Fee Records</h2>
-<div id="feeTable"></div>
+
+<h2>💰 Fee Status</h2>
+
+<table>
+<thead>
+<tr>
+<th>Student</th>
+<th>Monthly Fee</th>
+<th>Total Due</th>
+<th>Total Paid</th>
+<th>Remaining</th>
+</tr>
+</thead>
+
+<tbody id="feeStatusTable"></tbody>
+</table>
+
+</div>
+
+</section>
+
+
+<!-- FEE RECORDS -->
+
+<section class="section" id="feeRecords">
+
+<div class="panel">
+
+<h2>🧾 Add Fee Payment</h2>
+
+<div class="grid">
+
+<div>
+<label>Student</label>
+<select id="paymentStudent" onchange="showStudentFeeInfo()"></select>
+</div>
+
+<div>
+<label>Payment Date</label>
+<input type="date" id="paymentDate">
+</div>
+
+<div>
+<label>Amount</label>
+<input type="number" id="paymentAmount" placeholder="Amount Paid">
+</div>
+
+<div>
+<label>Payment Mode</label>
+
+<select id="paymentMode" onchange="paymentModeChanged()">
+<option value="Cash">💵 Cash</option>
+<option value="Online">💳 Online</option>
+</select>
+
+</div>
+
+<div id="utrBox" style="display:none">
+<label>UTR Number</label>
+<input id="utrNumber" placeholder="Enter UTR Number">
+</div>
+
+</div>
+
+<div id="studentFeeInfo"></div>
+
+<button class="green" onclick="savePayment()">
+💾 SAVE PAYMENT
+</button>
+
+</div>
+
+
+<div class="panel">
+
+<h2>🧾 Fee Payment History</h2>
+
+<div class="grid">
+
+<div>
+<label>Select Student</label>
+<select id="recordStudent" onchange="showFeeRecords()"></select>
+</div>
+
+<div>
+<label>Payment Mode</label>
+<select id="recordMode" onchange="showFeeRecords()">
+<option value="">All</option>
+<option value="Cash">Cash</option>
+<option value="Online">Online</option>
+</select>
+</div>
+
+</div>
+
+<div id="feeRecordTable"></div>
+
 </div>
 
 </section>
 
 
 <!-- NOTICE -->
-<section id="notices" class="page hide">
+
+<section class="section" id="notices">
 
 <div class="panel">
 
-<h2>Create Notice</h2>
+<h2>📢 Notice Board — Admin Only</h2>
 
-<input id="noticeTitle" placeholder="Notice Title">
+<label>Notice Title</label>
+<input id="noticeTitle">
 
-<textarea id="noticeText" placeholder="Notice / Announcement"></textarea>
+<label>Notice</label>
+<textarea id="noticeText" rows="5"></textarea>
 
-<input id="posterUrl" placeholder="Poster Image URL (optional)">
+<label>Poster Image URL</label>
+<input id="noticeImage">
 
-<button onclick="addNotice()" style="background:#2563eb;color:white">
-📢 POST NOTICE
+<button class="primary" onclick="publishNotice()">
+📢 PUBLISH NOTICE
 </button>
 
 </div>
 
 <div class="panel">
-<h2>All Notices</h2>
+<h2>Published Notices</h2>
 <div id="noticeList"></div>
 </div>
 
 </section>
 
 
-<!-- ATTENDANCE -->
-<section id="attendance" class="page hide">
+<!-- TEACHER ATTENDANCE -->
 
-<div class="panel">
+<section class="section" id="teacherAttendance">
 
-<h2>Teacher Attendance</h2>
+<div class="teacherbox">
 
-<p>
-Teacher:
-<strong id="teacherDisplay"></strong>
-</p>
-
-<p>
-Subject:
-<strong id="subjectDisplay"></strong>
-</p>
-
-<select id="attendanceClass" onchange="loadAttendanceStudents()">
-<option value="">Select Class</option>
-<option>Nursery</option>
-<option>LKG</option>
-<option>UKG</option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-<option>11</option>
-<option>12</option>
-</select>
-
-<input id="attendanceDate" type="date">
-
-<div id="attendanceStudents"></div>
+<h2 id="teacherWelcome">👩‍🏫 Teacher</h2>
+<div id="teacherSubject">Subject: -</div>
 
 </div>
 
-</section>
-
-
-<!-- HISTORY -->
-<section id="history" class="page hide">
-
 <div class="panel">
 
-<h2>Attendance History</h2>
+<h2>📅 Mark Attendance</h2>
 
-<select id="historyClass" onchange="loadHistory()">
+<div class="grid">
+
+<div>
+<label>Class</label>
+<select id="teacherClass" onchange="teacherStudents()">
 <option value="">Select Class</option>
-<option>Nursery</option>
-<option>LKG</option>
-<option>UKG</option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-<option>11</option>
-<option>12</option>
+<option>Nursery</option><option>LKG</option><option>UKG</option>
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option><option>6</option>
+<option>7</option><option>8</option><option>9</option>
+<option>10</option><option>11</option><option>12</option>
 </select>
+</div>
 
-<button onclick="makeAttendancePDF()" style="background:#dc2626;color:white">
-📄 MAKE PDF
+<div>
+<label>Section</label>
+<select id="teacherSection" onchange="teacherStudents()">
+<option value="">Select Section</option>
+<option>A</option><option>B</option><option>C</option><option>D</option>
+</select>
+</div>
+
+<div>
+<label>Date</label>
+<input type="date" id="teacherDate">
+</div>
+
+</div>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Student</th>
+<th>Attendance</th>
+</tr>
+</thead>
+<tbody id="teacherAttendanceTable"></tbody>
+</table>
+
+<button class="primary" onclick="saveAttendance()">
+💾 SAVE ATTENDANCE
 </button>
 
-<div id="historyTable"></div>
+</div>
+
+</section>
+
+
+<!-- TEACHER REPORT -->
+
+<section class="section" id="teacherReport">
+
+<div class="panel">
+
+<h2>📊 Student Attendance History</h2>
+
+<div class="grid">
+
+<div>
+<label>Class</label>
+<select id="reportClass" onchange="teacherReport()">
+<option value="">Select Class</option>
+<option>Nursery</option><option>LKG</option><option>UKG</option>
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option><option>6</option>
+<option>7</option><option>8</option><option>9</option>
+<option>10</option><option>11</option><option>12</option>
+</select>
+</div>
+
+<div>
+<label>Section</label>
+<select id="reportSection" onchange="teacherReport()">
+<option value="">Select Section</option>
+<option>A</option><option>B</option><option>C</option><option>D</option>
+</select>
+</div>
+
+</div>
+
+<div id="teacherReportTable"></div>
 
 </div>
 
 </section>
 
+
+<!-- TEACHER NOTICE -->
+
+<section class="section" id="teacherNotices">
+
+<div class="panel">
+
+<h2>📢 Notice Board</h2>
+
+<div id="teacherNoticeList"></div>
+
 </div>
+
+</section>
+
+
+<!-- RECEIPT -->
+
+<section class="section" id="receiptSection">
+
+<div class="no-print">
+<button class="gray" onclick="showSection('feeRecords')">
+← Back
+</button>
+<button class="primary" onclick="window.print()">
+🖨 PRINT RECEIPT
+</button>
+</div>
+
+<div id="receiptBox"></div>
+
+</section>
+
+
+</main>
 </div>
 
 
-<script>
+<script type="module">
 
-/* =====================================================
-   FIREBASE CONFIG
-   APNI FIREBASE CONFIG YAHAN PASTE KARO
-===================================================== */
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA1KBQhTCxrHvkGWy7O3pqjjYpZv4A1uyI",
-  authDomain: "law90-school.firebaseapp.com",
-  projectId: "law90-school",
-  storageBucket: "law90-school.firebasestorage.app",
-  messagingSenderId: "560267717541",
-  appId: "1:560267717541:web:1d105fb165c9dec03ad64c",
-  measurementId: "G-MD10CR9Z47"
+import {
+getFirestore,
+collection,
+getDocs,
+addDoc,
+doc,
+setDoc,
+deleteDoc
+}
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+/* ================= FIREBASE ================= */
+
+const firebaseConfig={
+apiKey:"AIzaSyA1KBQhTCxrHvkGWy7O3pqjjYpZv4A1uyI",
+authDomain:"law90-school.firebaseapp.com",
+projectId:"law90-school",
+storageBucket:"law90-school.firebasestorage.app",
+messagingSenderId:"560267717541",
+appId:"1:560267717541:web:1d105fb165c9dec03ad64c",
+measurementId:"G-MD10CR9Z47"
 };
 
-firebase.initializeApp(firebaseConfig);
-
-const db = firebase.firestore();
-const auth = firebase.auth();
-
-let secondaryApp;
-let secondaryAuth;
-
-try{
- secondaryApp=firebase.initializeApp(firebaseConfig,"TeacherCreation");
- secondaryAuth=secondaryApp.auth();
-}catch(e){}
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
 
 
-/* =====================================================
-   VARIABLES
-===================================================== */
+/* ================= VARIABLES ================= */
 
-let currentRole="principal";
-let currentUser=null;
-let currentTeacher=null;
 let students=[];
 let teachers=[];
-let attendanceData=[];
+let attendance=[];
+let fees=[];
+let payments=[];
+let notices=[];
+
+let currentUser=null;
+let currentTeacher=null;
 
 
-/* =====================================================
-   DATE
-===================================================== */
+/* ================= DATE ================= */
 
-function todayString(){
+function today(){
 
- const d=new Date();
+const d=new Date();
 
- return d.getFullYear()+"-"+
- String(d.getMonth()+1).padStart(2,"0")+"-"+
- String(d.getDate()).padStart(2,"0");
+return d.getFullYear()+"-"+
+String(d.getMonth()+1).padStart(2,"0")+"-"+
+String(d.getDate()).padStart(2,"0");
 
 }
 
-document.getElementById("today").innerText=
- new Date().toLocaleDateString("en-IN",{
- day:"2-digit",
- month:"long",
- year:"numeric"
-});
+function setDates(){
 
-document.getElementById("todayCard").innerText=
- new Date().toLocaleDateString("en-IN",{
- day:"2-digit",
- month:"short",
- year:"numeric"
-});
-
-document.getElementById("attendanceDate").value=todayString();
-
-
-/* =====================================================
-   ROLE
-===================================================== */
-
-function setRole(role){
-
- currentRole=role;
-
- document.getElementById("principalBtn")
- .classList.toggle("active",role==="principal");
-
- document.getElementById("teacherBtn")
- .classList.toggle("active",role==="teacher");
+document.getElementById("adminDate").value=today();
+document.getElementById("teacherDate").value=today();
+document.getElementById("paymentDate").value=today();
+document.getElementById("feeStartDate").value=today();
 
 }
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
+/* ================= LOGIN ================= */
 
-async function login(){
+window.login=async function(){
 
- const email=document.getElementById("loginEmail").value.trim();
- const password=document.getElementById("loginPassword").value;
+const role=document.getElementById("loginRole").value;
+const id=document.getElementById("loginUser").value.trim();
+const password=document.getElementById("loginPass").value;
 
- if(!email||!password){
-  document.getElementById("loginMsg").innerText=
-  "Email aur password bharo";
-  return;
- }
+document.getElementById("loginError").style.display="none";
 
- try{
 
-  const result=await auth.signInWithEmailAndPassword(email,password);
+/* PRINCIPAL LOGIN */
 
-  currentUser=result.user;
+if(role==="principal"){
 
-  const doc=await db.collection("users")
-  .doc(currentUser.uid).get();
+/*
+DEFAULT ADMIN LOGIN
+ID: LAW90
+PASSWORD: 9625
+*/
 
-  if(!doc.exists){
+if(id==="LAW90" && password==="9625"){
 
-   document.getElementById("loginMsg").innerText=
-   "User profile nahi mila";
-   await auth.signOut();
-   return;
-  }
+currentUser="principal";
+startApp();
+return;
 
-  const data=doc.data();
-
-  if(currentRole!==data.role){
-
-   document.getElementById("loginMsg").innerText=
-   "Galat login type select kiya hai";
-   await auth.signOut();
-   return;
-  }
-
-  if(data.role==="teacher"){
-   currentTeacher=data;
-  }
-
-  openApp(data);
-
- }catch(error){
-
-  document.getElementById("loginMsg").innerText=
-  error.message;
-
- }
+}
 
 }
 
 
-/* =====================================================
-   OPEN APP
-===================================================== */
+/* TEACHER LOGIN */
 
-function openApp(user){
+if(role==="teacher"){
 
- document.getElementById("loginPage").style.display="none";
- document.getElementById("app").style.display="block";
+await loadTeachers();
 
- document.getElementById("sideUser").innerText=
- user.name || user.email;
+const teacher=teachers.find(t=>
+String(t.loginId)===id &&
+String(t.password)===password
+);
 
- if(user.role==="principal"){
+if(teacher){
 
-  document.getElementById("adminMenu").classList.remove("hide");
-  document.getElementById("teacherMenu").classList.add("hide");
+currentUser="teacher";
+currentTeacher=teacher;
+startApp();
+return;
 
- }else{
-
-  document.getElementById("adminMenu").classList.add("hide");
-  document.getElementById("teacherMenu").classList.remove("hide");
-
-  document.getElementById("teacherDisplay").innerText=user.name;
-  document.getElementById("subjectDisplay").innerText=user.subject;
-
- }
-
- loadDashboard();
- loadStudents();
- loadTeachers();
- loadFees();
- loadNotices();
+}
 
 }
 
 
-/* =====================================================
-   PAGE
-===================================================== */
+document.getElementById("loginError").style.display="block";
 
-function showPage(id){
+};
 
- document.querySelectorAll(".page")
- .forEach(x=>x.classList.add("hide"));
 
- document.getElementById(id)
- .classList.remove("hide");
+function startApp(){
 
- document.getElementById("pageTitle")
- .innerText=
- id.charAt(0).toUpperCase()+id.slice(1);
+document.getElementById("loginPage").style.display="none";
+document.getElementById("app").style.display="block";
 
- if(id==="attendance"){
-  loadAttendanceStudents();
- }
+setDates();
 
- if(id==="history"){
-  loadHistory();
- }
+if(currentUser==="teacher"){
+
+document.getElementById("principalMenu").style.display="none";
+document.getElementById("teacherMenu").style.display="block";
+
+document.getElementById("profile").innerText=
+"👩‍🏫 "+currentTeacher.name;
+
+document.getElementById("teacherWelcome").innerText=
+"👩‍🏫 "+currentTeacher.name;
+
+document.getElementById("teacherSubject").innerText=
+"📚 Subject: "+currentTeacher.subject;
+
+showSection("teacherAttendance");
+
+}else{
+
+document.getElementById("principalMenu").style.display="block";
+document.getElementById("teacherMenu").style.display="none";
+
+document.getElementById("profile").innerText="👨‍💼 PRINCIPAL";
+
+}
+
+loadData();
 
 }
 
 
-/* =====================================================
-   LOGOUT
-===================================================== */
+window.logout=function(){
 
-async function logout(){
+currentUser=null;
+currentTeacher=null;
 
- await auth.signOut();
+document.getElementById("app").style.display="none";
+document.getElementById("loginPage").style.display="flex";
 
- location.reload();
+document.getElementById("loginUser").value="";
+document.getElementById("loginPass").value="";
 
-}
-
-
-/* =====================================================
-   STUDENTS
-===================================================== */
-
-async function addStudent(){
-
- const name=document.getElementById("studentName").value.trim();
- const roll=document.getElementById("studentRoll").value.trim();
- const cls=document.getElementById("studentClass").value;
- const parent=document.getElementById("studentParent").value.trim();
- const phone=document.getElementById("studentPhone").value.trim();
- const fee=Number(document.getElementById("studentFee").value||0);
-
- if(!name||!cls){
-  alert("Student name aur class bharo");
-  return;
- }
-
- await db.collection("students").add({
-
-  name,
-  roll,
-  class:cls,
-  parent,
-  phone,
-  monthlyFee:fee,
-  totalPaid:0,
-  totalDue:0,
-  createdAt:firebase.firestore.FieldValue.serverTimestamp()
-
- });
-
- alert("Student added");
-
- document.querySelectorAll("#students input")
- .forEach(x=>x.value="");
-
- loadStudents();
- loadDashboard();
-
-}
+};
 
 
-async function loadStudents(){
+/* ================= NAVIGATION ================= */
 
- const snap=await db.collection("students")
- .orderBy("name").get();
+window.showSection=function(id,button){
 
- students=[];
+document.querySelectorAll(".section")
+.forEach(x=>x.classList.remove("active"));
 
- snap.forEach(doc=>{
-  students.push({
-   id:doc.id,
-   ...doc.data()
-  });
- });
+document.getElementById(id).classList.add("active");
 
- let html=`
- <table>
- <tr>
- <th>Name</th>
- <th>Class</th>
- <th>Roll</th>
- <th>Monthly Fee</th>
- <th>Action</th>
- </tr>`;
+document.querySelectorAll(".nav")
+.forEach(x=>x.classList.remove("active"));
 
- students.forEach(s=>{
+if(button)button.classList.add("active");
 
-  html+=`
-  <tr>
-   <td>${escapeHtml(s.name)}</td>
-   <td>${escapeHtml(s.class)}</td>
-   <td>${escapeHtml(s.roll||"")}</td>
-   <td>₹${Number(s.monthlyFee||0).toLocaleString("en-IN")}</td>
-   <td>
-   <button onclick="deleteStudent('${s.id}')"
-   style="background:#dc2626;color:white">
-   Delete
-   </button>
-   </td>
-  </tr>`;
+const titles={
+dashboard:"Dashboard",
+students:"Students",
+teachers:"Teachers",
+attendance:"Attendance",
+fees:"Fees",
+feeRecords:"Fee Records",
+notices:"Notice Board",
+teacherAttendance:"Teacher Attendance",
+teacherReport:"Attendance Report",
+teacherNotices:"Notice Board",
+receiptSection:"Fee Receipt"
+};
 
- });
-
- html+="</table>";
-
- document.getElementById("studentTable").innerHTML=html;
-
- const select=document.getElementById("feeStudent");
-
- select.innerHTML=
- `<option value="">Select Student</option>`;
-
- students.forEach(s=>{
-  select.innerHTML+=
-  `<option value="${s.id}">
-  ${escapeHtml(s.name)} - Class ${escapeHtml(s.class)}
-  </option>`;
- });
-
-}
+document.getElementById("pageTitle").innerText=
+titles[id]||"School";
 
 
-async function deleteStudent(id){
+if(id==="feeRecords")fillPaymentStudents();
+if(id==="fees")fillFeeStudents();
+if(id==="teacherAttendance")teacherStudents();
+if(id==="teacherNotices")displayNotices("teacherNoticeList");
 
- if(!confirm("Student delete karna hai?"))return;
-
- await db.collection("students").doc(id).delete();
-
- loadStudents();
- loadDashboard();
-
-}
+};
 
 
-/* =====================================================
-   TEACHERS
-===================================================== */
-
-async function createTeacher(){
-
- const name=document.getElementById("teacherName").value.trim();
- const subject=document.getElementById("teacherSubject").value.trim();
- const cls=document.getElementById("teacherClass").value;
- const email=document.getElementById("teacherEmail").value.trim();
- const password=document.getElementById("teacherPassword").value;
-
- if(!name||!subject||!cls||!email||!password){
-
-  alert("Sab details bharo");
-  return;
-
- }
-
- try{
-
-  if(!secondaryAuth){
-   alert("Firebase setup check karo");
-   return;
-  }
-
-  const result=
-  await secondaryAuth.createUserWithEmailAndPassword(
-   email,password
-  );
-
-  await db.collection("users")
-  .doc(result.user.uid)
-  .set({
-
-   name,
-   subject,
-   class:cls,
-   email,
-   role:"teacher",
-   createdAt:firebase.firestore.FieldValue.serverTimestamp()
-
-  });
-
-  alert("Teacher account create ho gaya");
-
-  document.querySelectorAll("#teachers input")
-  .forEach(x=>x.value="");
-
-  loadTeachers();
-
-  await secondaryAuth.signOut();
-
- }catch(error){
-
-  alert(error.message);
-
- }
-
-}
-
+/* ================= LOAD DATA ================= */
 
 async function loadTeachers(){
 
- const snap=await db.collection("users")
- .where("role","==","teacher").get();
+const snap=await getDocs(collection(db,"teachers"));
 
- teachers=[];
-
- snap.forEach(doc=>{
-  teachers.push({
-   id:doc.id,
-   ...doc.data()
-  });
- });
-
- let html=`
- <table>
- <tr>
- <th>Name</th>
- <th>Subject</th>
- <th>Class</th>
- <th>Email</th>
- </tr>`;
-
- teachers.forEach(t=>{
-
-  html+=`
-  <tr>
-   <td>${escapeHtml(t.name)}</td>
-   <td>${escapeHtml(t.subject)}</td>
-   <td>${escapeHtml(t.class)}</td>
-   <td>${escapeHtml(t.email)}</td>
-  </tr>`;
-
- });
-
- html+="</table>";
-
- document.getElementById("teacherTable").innerHTML=html;
+teachers=snap.docs.map(d=>({
+docId:d.id,...d.data()
+}));
 
 }
 
 
-/* =====================================================
-   FEES
-===================================================== */
+async function loadData(){
 
-function loadFeeStudent(){
+let snap=await getDocs(collection(db,"students"));
 
- const id=document.getElementById("feeStudent").value;
+students=snap.docs.map(d=>({
+docId:d.id,...d.data()
+}));
 
- const s=students.find(x=>x.id===id);
+await loadTeachers();
 
- if(!s){
-  document.getElementById("feeInfo").innerHTML="";
-  return;
- }
 
- document.getElementById("feeInfo").innerHTML=`
- <div class="card">
- <b>${escapeHtml(s.name)}</b><br>
- Class: ${escapeHtml(s.class)}<br>
- Monthly Fee:
- ₹${Number(s.monthlyFee||0).toLocaleString("en-IN")}<br>
- Total Paid:
- ₹${Number(s.totalPaid||0).toLocaleString("en-IN")}<br>
- Total Due:
- ₹${Number(s.totalDue||0).toLocaleString("en-IN")}
- </div>`;
+snap=await getDocs(collection(db,"attendance"));
+
+attendance=snap.docs.map(d=>({
+docId:d.id,...d.data()
+}));
+
+
+snap=await getDocs(collection(db,"fees"));
+
+fees=snap.docs.map(d=>({
+docId:d.id,...d.data()
+}));
+
+
+snap=await getDocs(collection(db,"payments"));
+
+payments=snap.docs.map(d=>({
+docId:d.id,...d.data()
+}));
+
+
+snap=await getDocs(collection(db,"notices"));
+
+notices=snap.docs.map(d=>({
+docId:d.id,...d.data()
+}));
+
+
+/*
+10 तारीख वाली pending fee calculation
+*/
+
+await processMonthlyFees();
+
+
+if(currentUser==="principal"){
+
+displayStudents();
+displayTeachers();
+fillFeeStudents();
+fillPaymentStudents();
+displayFeeStatus();
+displayNotices("noticeList");
+displayNotices("dashboardNotices");
+updateDashboard();
+
+}else{
+
+displayNotices("teacherNoticeList");
+
+}
 
 }
 
 
-async function payFee(){
+/* ================= STUDENTS ================= */
 
- const id=document.getElementById("feeStudent").value;
- const amount=Number(document.getElementById("payAmount").value||0);
- const mode=document.getElementById("payMode").value;
- const utr=document.getElementById("utr").value.trim();
+window.addStudent=async function(){
 
- if(!id||amount<=0){
-  alert("Student aur amount select karo");
-  return;
- }
+const id=document.getElementById("sid").value.trim();
+const name=document.getElementById("sname").value.trim();
+const className=document.getElementById("sclass").value;
+const section=document.getElementById("ssection").value;
+const father=document.getElementById("sfather").value.trim();
+const phone=document.getElementById("sphone").value.trim();
 
- if(mode==="Online"&&!utr){
-  alert("Online payment ke liye UTR bharo");
-  return;
- }
+if(!id||!name||!className||!section){
 
- const s=students.find(x=>x.id===id);
+alert("Student ID, Name, Class aur Section bharna zaroori hai.");
+return;
 
- const newPaid=Number(s.totalPaid||0)+amount;
+}
 
- const newDue=Math.max(
-  0,
-  Number(s.totalDue||0)-amount
- );
+if(students.some(s=>String(s.id)===id)){
 
- await db.collection("students").doc(id).update({
+alert("Student ID already exists.");
+return;
 
-  totalPaid:newPaid,
-  totalDue:newDue
+}
 
- });
+const ref=await addDoc(
+collection(db,"students"),
+{id,name,className,section,father,phone}
+);
 
- const ref=await db.collection("fees").add({
+students.push({
+docId:ref.id,
+id,name,className,section,father,phone
+});
 
-  studentId:id,
-  studentName:s.name,
-  amount,
-  mode,
-  utr:mode==="Online"?utr:"",
-  date:todayString(),
-  createdAt:firebase.firestore.FieldValue.serverTimestamp()
+displayStudents();
+fillFeeStudents();
+fillPaymentStudents();
+updateDashboard();
 
- });
+document.getElementById("sid").value="";
+document.getElementById("sname").value="";
+document.getElementById("sclass").value="";
+document.getElementById("ssection").value="";
+document.getElementById("sfather").value="";
+document.getElementById("sphone").value="";
 
- alert("Payment saved");
+alert("✅ Student added.");
 
- makeReceipt({
-  id:ref.id,
-  student:s,
-  amount,
-  mode,
-  utr
- });
+};
 
- loadStudents();
- loadFees();
- loadDashboard();
+
+function displayStudents(){
+
+const table=document.getElementById("studentTable");
+table.innerHTML="";
+
+students.forEach(s=>{
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${s.id}</td>
+<td><b>${s.name}</b></td>
+<td>${s.className}</td>
+<td>${s.section}</td>
+<td>${s.father||""}</td>
+<td>${s.phone||""}</td>
+
+<td>
+<div class="actions">
+
+<button class="edit"
+onclick="editStudent('${s.docId}')">
+✏️ Edit
+</button>
+
+<button class="delete"
+onclick="deleteStudent('${s.docId}')">
+🗑 Delete
+</button>
+
+</div>
+</td>
+
+</tr>
+
+`;
+
+});
 
 }
 
 
-async function loadFees(){
+window.editStudent=async function(id){
 
- const snap=await db.collection("fees")
- .orderBy("createdAt","desc").limit(100).get();
+const s=students.find(x=>x.docId===id);
+if(!s)return;
 
- let html=`
- <table>
- <tr>
- <th>Date</th>
- <th>Student</th>
- <th>Amount</th>
- <th>Mode</th>
- <th>UTR</th>
- <th>Receipt</th>
- </tr>`;
+const name=prompt("Student Name:",s.name);
+if(name===null)return;
 
- snap.forEach(doc=>{
+const cls=prompt("Class:",s.className);
+if(cls===null)return;
 
-  const f=doc.data();
+const section=prompt("Section:",s.section);
+if(section===null)return;
 
-  html+=`
-  <tr>
-   <td>${escapeHtml(f.date||"")}</td>
-   <td>${escapeHtml(f.studentName||"")}</td>
-   <td>₹${Number(f.amount||0).toLocaleString("en-IN")}</td>
-   <td>${escapeHtml(f.mode||"")}</td>
-   <td>${escapeHtml(f.utr||"-")}</td>
-   <td>
-   <button onclick='receiptFromId("${doc.id}")'>
-   Receipt
-   </button>
-   </td>
-  </tr>`;
+const father=prompt("Father Name:",s.father||"");
+if(father===null)return;
 
- });
+const phone=prompt("Phone:",s.phone||"");
+if(phone===null)return;
 
- html+="</table>";
+const data={
+...s,
+name:name.trim(),
+className:cls.trim(),
+section:section.trim(),
+father:father.trim(),
+phone:phone.trim()
+};
 
- document.getElementById("feeTable").innerHTML=html;
+delete data.docId;
+
+await setDoc(doc(db,"students",id),data);
+
+Object.assign(s,data);
+
+displayStudents();
+fillFeeStudents();
+fillPaymentStudents();
+
+alert("✅ Student updated.");
+
+};
+
+
+window.deleteStudent=async function(id){
+
+const s=students.find(x=>x.docId===id);
+
+if(!s)return;
+
+if(!confirm("Delete "+s.name+"?"))return;
+
+await deleteDoc(doc(db,"students",id));
+
+students=students.filter(x=>x.docId!==id);
+
+displayStudents();
+fillFeeStudents();
+fillPaymentStudents();
+updateDashboard();
+
+alert("🗑 Student deleted.");
+
+};
+
+
+/* ================= TEACHERS ================= */
+
+window.addTeacher=async function(){
+
+const name=document.getElementById("tname").value.trim();
+const subject=document.getElementById("tsubject").value.trim();
+const loginId=document.getElementById("tid").value.trim();
+const password=document.getElementById("tpassword").value.trim();
+
+if(!name||!subject||!loginId||!password){
+
+alert("All teacher fields are required.");
+return;
+
+}
+
+if(teachers.some(t=>t.loginId===loginId)){
+
+alert("Teacher Login ID already exists.");
+return;
+
+}
+
+const ref=await addDoc(
+collection(db,"teachers"),
+{name,subject,loginId,password}
+);
+
+teachers.push({
+docId:ref.id,name,subject,loginId,password
+});
+
+displayTeachers();
+updateDashboard();
+
+document.getElementById("tname").value="";
+document.getElementById("tsubject").value="";
+document.getElementById("tid").value="";
+document.getElementById("tpassword").value="";
+
+alert("✅ Teacher login created.");
+
+};
+
+
+function displayTeachers(){
+
+const table=document.getElementById("teacherTable");
+table.innerHTML="";
+
+teachers.forEach(t=>{
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${t.name}</td>
+<td>${t.subject}</td>
+<td>${t.loginId}</td>
+
+<td>
+
+<div class="actions">
+
+<button class="edit"
+onclick="editTeacher('${t.docId}')">
+✏️ Edit
+</button>
+
+<button class="delete"
+onclick="deleteTeacher('${t.docId}')">
+🗑 Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`;
+
+});
 
 }
 
 
-async function receiptFromId(id){
+window.editTeacher=async function(id){
 
- const doc=await db.collection("fees").doc(id).get();
+const t=teachers.find(x=>x.docId===id);
+if(!t)return;
 
- if(!doc.exists)return;
+const name=prompt("Teacher Name:",t.name);
+if(name===null)return;
 
- const f=doc.data();
+const subject=prompt("Subject:",t.subject);
+if(subject===null)return;
 
- const s=students.find(x=>x.id===f.studentId)||{
-  name:f.studentName,
-  class:""
- };
+const loginId=prompt("Login ID:",t.loginId);
+if(loginId===null)return;
 
- makeReceipt({
-  id,
-  student:s,
-  amount:f.amount,
-  mode:f.mode,
-  utr:f.utr
- });
+const password=prompt("Password:",t.password);
+if(password===null)return;
+
+const data={
+name:name.trim(),
+subject:subject.trim(),
+loginId:loginId.trim(),
+password:password.trim()
+};
+
+await setDoc(doc(db,"teachers",id),data);
+
+Object.assign(t,data);
+
+displayTeachers();
+
+alert("✅ Teacher updated.");
+
+};
+
+
+window.deleteTeacher=async function(id){
+
+const t=teachers.find(x=>x.docId===id);
+
+if(!t)return;
+
+if(!confirm("Delete teacher "+t.name+"?"))return;
+
+await deleteDoc(doc(db,"teachers",id));
+
+teachers=teachers.filter(x=>x.docId!==id);
+
+displayTeachers();
+updateDashboard();
+
+alert("🗑 Teacher deleted.");
+
+};
+
+
+/* ================= ATTENDANCE ================= */
+
+window.teacherStudents=function(){
+
+if(currentUser!=="teacher")return;
+
+const cls=document.getElementById("teacherClass").value;
+const section=document.getElementById("teacherSection").value;
+const date=document.getElementById("teacherDate").value;
+
+const table=document.getElementById("teacherAttendanceTable");
+
+table.innerHTML="";
+
+if(!cls||!section)return;
+
+students.filter(s=>
+String(s.className)===String(cls)&&
+String(s.section)===String(section)
+).forEach(s=>{
+
+const old=attendance.find(a=>
+String(a.studentId)===String(s.id)&&
+a.date===date
+);
+
+const status=old?old.status:"";
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${s.id}</td>
+<td><b>${s.name}</b></td>
+
+<td>
+
+<button class="attbtn present ${status==="Present"?"selected":""}"
+onclick="chooseAttendance('${s.id}','Present',this)">
+✓ PRESENT
+</button>
+
+<button class="attbtn absent ${status==="Absent"?"selected":""}"
+onclick="chooseAttendance('${s.id}','Absent',this)">
+✕ ABSENT
+</button>
+
+<input type="hidden" id="att_${s.id}" value="${status}">
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+};
+
+
+window.chooseAttendance=function(id,status,btn){
+
+const parent=btn.parentElement;
+
+parent.querySelectorAll(".attbtn")
+.forEach(x=>x.classList.remove("selected"));
+
+btn.classList.add("selected");
+
+document.getElementById("att_"+id).value=status;
+
+};
+
+
+window.saveAttendance=async function(){
+
+const cls=document.getElementById("teacherClass").value;
+const section=document.getElementById("teacherSection").value;
+const date=document.getElementById("teacherDate").value;
+
+if(!cls||!section){
+
+alert("Class aur Section select karo.");
+return;
+
+}
+
+const list=students.filter(s=>
+String(s.className)===String(cls)&&
+String(s.section)===String(section)
+);
+
+for(const s of list){
+
+const status=document.getElementById("att_"+s.id)?.value;
+
+if(!status)continue;
+
+const old=attendance.find(a=>
+String(a.studentId)===String(s.id)&&
+a.date===date
+);
+
+const data={
+studentId:s.id,
+studentName:s.name,
+className:s.className,
+section:s.section,
+date,
+status,
+markedBy:currentTeacher.name
+};
+
+if(old){
+
+await setDoc(doc(db,"attendance",old.docId),data);
+Object.assign(old,data);
+
+}else{
+
+const ref=await addDoc(collection(db,"attendance"),data);
+
+attendance.push({
+docId:ref.id,...data
+});
+
+}
+
+}
+
+alert("✅ Attendance saved.");
+teacherStudents();
+
+};
+
+
+/* ADMIN ATTENDANCE */
+
+window.adminAttendance=function(){
+
+const cls=document.getElementById("adminClass").value;
+const section=document.getElementById("adminSection").value;
+const date=document.getElementById("adminDate").value;
+
+const table=document.getElementById("adminAttendanceTable");
+
+table.innerHTML="";
+
+if(!cls||!section)return;
+
+students.filter(s=>
+String(s.className)===String(cls)&&
+String(s.section)===String(section)
+).forEach(s=>{
+
+const a=attendance.find(x=>
+String(x.studentId)===String(s.id)&&
+x.date===date
+);
+
+table.innerHTML+=`
+
+<tr>
+<td>${s.id}</td>
+<td>${s.name}</td>
+<td>${s.className}</td>
+<td>${s.section}</td>
+<td>
+<b style="color:${
+a?.status==="Present"?"green":
+a?.status==="Absent"?"red":"#64748b"
+}">
+${a?.status||"Not Marked"}
+</b>
+</td>
+</tr>
+
+`;
+
+});
+
+};
+
+
+/* TEACHER REPORT */
+
+window.teacherReport=function(){
+
+const cls=document.getElementById("reportClass").value;
+const section=document.getElementById("reportSection").value;
+
+const box=document.getElementById("teacherReportTable");
+
+if(!cls||!section){
+
+box.innerHTML="";
+return;
+
+}
+
+const list=students.filter(s=>
+String(s.className)===String(cls)&&
+String(s.section)===String(section)
+);
+
+let html=`
+
+<table>
+
+<thead>
+<tr>
+<th>Student</th>
+<th>Present</th>
+<th>Absent</th>
+<th>Total</th>
+</tr>
+</thead>
+
+<tbody>
+`;
+
+list.forEach(s=>{
+
+const records=attendance.filter(a=>
+String(a.studentId)===String(s.id)
+);
+
+const p=records.filter(a=>a.status==="Present").length;
+const ab=records.filter(a=>a.status==="Absent").length;
+
+html+=`
+
+<tr>
+<td><b>${s.name}</b></td>
+<td style="color:green">✓ ${p}</td>
+<td style="color:red">✕ ${ab}</td>
+<td>${p+ab}</td>
+</tr>
+
+`;
+
+});
+
+html+="</tbody></table>";
+
+box.innerHTML=html;
+
+};
+
+
+/* ================= FEES ================= */
+
+/*
+Har student ki fee setup.
+10 तारीख ko monthly fee automatically add
+hogee jab system login/open hoga.
+*/
+
+window.saveFeeSetup=async function(){
+
+const studentId=document.getElementById("feeStudent").value;
+const monthly=Number(document.getElementById("monthlyFee").value);
+const initialPaid=Number(document.getElementById("initialPaid").value||0);
+const startDate=document.getElementById("feeStartDate").value;
+
+if(!studentId||!monthly){
+
+alert("Student aur Monthly Fee bharna zaroori hai.");
+return;
+
+}
+
+const old=fees.find(f=>
+String(f.studentId)===String(studentId)
+);
+
+const data={
+studentId,
+monthlyFee:monthly,
+startDate:startDate,
+lastFeeDate:startDate
+};
+
+if(old){
+
+await setDoc(doc(db,"fees",old.docId),{
+...old,
+...data
+});
+
+Object.assign(old,data);
+
+}else{
+
+const ref=await addDoc(
+collection(db,"fees"),
+{
+...data,
+createdAt:today()
+}
+);
+
+fees.push({
+docId:ref.id,
+...data
+});
+
+}
+
+displayFeeStatus();
+updateDashboard();
+
+alert("✅ Fee setup saved.");
+
+};
+
+
+/*
+10 तारीख के बाद जितने महीने pending हैं,
+उतने महीने की fee due calculation में add होगी.
+*/
+
+async function processMonthlyFees(){
+
+const now=new Date();
+
+if(now.getDate()<10)return;
+
+for(const fee of fees){
+
+if(!fee.monthlyFee||!fee.startDate)continue;
+
+let last=new Date(fee.lastFeeDate||fee.startDate);
+
+let changed=false;
+
+while(true){
+
+let next=new Date(
+last.getFullYear(),
+last.getMonth()+1,
+10
+);
+
+if(next>now)break;
+
+last=next;
+changed=true;
+
+}
+
+if(changed){
+
+const lastDate=
+last.getFullYear()+"-"+
+String(last.getMonth()+1).padStart(2,"0")+"-10";
+
+await setDoc(
+doc(db,"fees",fee.docId),
+{
+...fee,
+lastFeeDate:lastDate
+}
+);
+
+fee.lastFeeDate=lastDate;
+
+}
+
+}
 
 }
 
 
-/* =====================================================
-   RECEIPT
-===================================================== */
+/*
+Due calculation:
+monthly fee × months elapsed after start,
+minus all payments.
+*/
 
-function makeReceipt(data){
+function getFeeStats(studentId){
 
- const w=window.open("","_blank");
+const fee=fees.find(f=>
+String(f.studentId)===String(studentId)
+);
 
- w.document.write(`
- <html>
- <head>
- <title>Fee Receipt</title>
- <style>
- body{font-family:Arial;padding:40px}
- .box{border:2px solid #222;padding:30px;max-width:600px;margin:auto}
- h1{text-align:center}
- table{width:100%;border-collapse:collapse}
- td{padding:10px;border-bottom:1px solid #ddd}
- button{padding:10px 20px}
- </style>
- </head>
- <body>
+if(!fee){
 
- <div class="box">
+return {
+monthly:0,
+totalDue:0,
+paid:0,
+remaining:0
+};
 
- <h1>LAW INTERNATIONAL SCHOOL</h1>
- <h2 style="text-align:center">FEE RECEIPT</h2>
+}
 
- <table>
+const start=new Date(fee.startDate);
+const now=new Date();
 
- <tr>
- <td>Receipt No.</td>
- <td>${data.id}</td>
- </tr>
+let months=0;
 
- <tr>
- <td>Date</td>
- <td>${todayString()}</td>
- </tr>
+if(now>=start){
 
- <tr>
- <td>Student</td>
- <td>${escapeHtml(data.student.name)}</td>
- </tr>
+months=
+(now.getFullYear()-start.getFullYear())*12+
+(now.getMonth()-start.getMonth());
 
- <tr>
- <td>Class</td>
- <td>${escapeHtml(data.student.class||"")}</td>
- </tr>
+if(now.getDate()>=10)months++;
 
- <tr>
- <td>Amount Paid</td>
- <td>₹${Number(data.amount).toLocaleString("en-IN")}</td>
- </tr>
+if(months<1)months=1;
 
- <tr>
- <td>Payment Mode</td>
- <td>${escapeHtml(data.mode)}</td>
- </tr>
+}
 
- <tr>
- <td>UTR</td>
- <td>${escapeHtml(data.utr||"-")}</td>
- </tr>
+const totalDue=
+months*Number(fee.monthlyFee||0);
 
- </table>
+const paid=
+payments
+.filter(p=>String(p.studentId)===String(studentId))
+.reduce((sum,p)=>sum+Number(p.amount||0),0);
 
- <br><br>
- <p>Authorized Signature</p>
-
- </div>
-
- <br>
- <center>
- <button onclick="window.print()">PRINT / SAVE PDF</button>
- </center>
-
- </body>
- </html>
- `);
-
- w.document.close();
+return {
+monthly:Number(fee.monthlyFee||0),
+totalDue,
+paid,
+remaining:Math.max(0,totalDue-paid)
+};
 
 }
 
 
-/* =====================================================
-   NOTICES
-===================================================== */
+/* FEE STUDENT DROPDOWN */
 
-async function addNotice(){
+function fillFeeStudents(){
 
- const title=document.getElementById("noticeTitle").value.trim();
- const text=document.getElementById("noticeText").value.trim();
- const poster=document.getElementById("posterUrl").value.trim();
+const select=document.getElementById("feeStudent");
 
- if(!title||!text){
-  alert("Notice title aur text bharo");
-  return;
- }
+select.innerHTML=
+'<option value="">Select Student</option>';
 
- await db.collection("notices").add({
+students.forEach(s=>{
 
-  title,
-  text,
-  poster,
-  date:todayString(),
-  createdAt:firebase.firestore.FieldValue.serverTimestamp()
+select.innerHTML+=`
+<option value="${s.id}">
+${s.id} - ${s.name}
+</option>
+`;
 
- });
+});
 
- alert("Notice posted");
-
- document.getElementById("noticeTitle").value="";
- document.getElementById("noticeText").value="";
- document.getElementById("posterUrl").value="";
-
- loadNotices();
+displayFeeStatus();
 
 }
 
 
-async function loadNotices(){
+/* FEE STATUS */
 
- const snap=await db.collection("notices")
- .orderBy("createdAt","desc").limit(30).get();
+function displayFeeStatus(){
 
- let html="";
+const table=document.getElementById("feeStatusTable");
 
- snap.forEach(doc=>{
+if(!table)return;
 
-  const n=doc.data();
+table.innerHTML="";
 
-  html+=`
-  <div class="notice">
-  <h3>${escapeHtml(n.title)}</h3>
-  <p>${escapeHtml(n.text)}</p>
-  <small>${escapeHtml(n.date||"")}</small>
-  ${n.poster?
-  `<br><img src="${escapeHtml(n.poster)}"
-  style="max-width:300px;margin-top:10px">`
-  :""}
-  </div>`;
+students.forEach(s=>{
 
- });
+const st=getFeeStats(s.id);
 
- document.getElementById("noticeList").innerHTML=html;
- document.getElementById("dashboardNotices").innerHTML=html;
+table.innerHTML+=`
 
-}
+<tr>
 
+<td><b>${s.name}</b></td>
+<td>₹${st.monthly}</td>
+<td>₹${st.totalDue}</td>
+<td style="color:green">₹${st.paid}</td>
+<td style="color:${st.remaining>0?"red":"green"}">
+₹${st.remaining}
+</td>
 
-/* =====================================================
-   ATTENDANCE
-===================================================== */
+</tr>
 
-async function loadAttendanceStudents(){
+`;
 
- const cls=document.getElementById("attendanceClass").value;
-
- if(!cls)return;
-
- const snap=await db.collection("students")
- .where("class","==",cls).get();
-
- let html=`
- <h3>Date:
- ${document.getElementById("attendanceDate").value}
- </h3>`;
-
- snap.forEach(doc=>{
-
-  const s=doc.data();
-
-  html+=`
-  <div class="card"
-  style="display:flex;justify-content:space-between;align-items:center">
-
-  <div>
-  <b>${escapeHtml(s.name)}</b><br>
-  <span class="small">Roll: ${escapeHtml(s.roll||"")}</span>
-  </div>
-
-  <div>
-  <button class="present"
-  onclick="saveAttendance('${doc.id}','${escapeHtml(s.name)}','Present')">
-  PRESENT
-  </button>
-
-  <button class="absent"
-  onclick="saveAttendance('${doc.id}','${escapeHtml(s.name)}','Absent')">
-  ABSENT
-  </button>
-  </div>
-
-  </div>`;
-
- });
-
- document.getElementById("attendanceStudents").innerHTML=html;
+});
 
 }
 
 
-async function saveAttendance(studentId,studentName,status){
+/* ================= PAYMENT ================= */
 
- const date=document.getElementById("attendanceDate").value;
- const cls=document.getElementById("attendanceClass").value;
+function fillPaymentStudents(){
 
- if(!date||!cls)return;
+const ids=["paymentStudent","recordStudent"];
 
- const id=
- studentId+"_"+date+"_"+currentTeacher.subject
- .replace(/\s/g,"_");
+ids.forEach(id=>{
 
- await db.collection("attendance").doc(id).set({
+const select=document.getElementById(id);
 
-  studentId,
-  studentName,
-  class:cls,
-  subject:currentTeacher.subject,
-  teacherId:currentUser.uid,
-  teacherName:currentTeacher.name,
-  status,
-  date
+if(!select)return;
 
- });
+select.innerHTML=
+'<option value="">Select Student</option>';
 
- alert(studentName+" - "+status);
+students.forEach(s=>{
 
-}
+select.innerHTML+=`
+<option value="${s.id}">
+${s.id} - ${s.name}
+</option>
+`;
 
+});
 
-/* =====================================================
-   HISTORY
-===================================================== */
-
-async function loadHistory(){
-
- const cls=document.getElementById("historyClass").value;
-
- if(!cls)return;
-
- const snap=await db.collection("attendance")
- .where("class","==",cls)
- .where("subject","==",currentTeacher.subject)
- .get();
-
- let map={};
-
- snap.forEach(doc=>{
-
-  const a=doc.data();
-
-  if(!map[a.studentId]){
-   map[a.studentId]={
-    name:a.studentName,
-    present:0,
-    absent:0,
-    records:[]
-   };
-  }
-
-  if(a.status==="Present")
-   map[a.studentId].present++;
-  else
-   map[a.studentId].absent++;
-
-  map[a.studentId].records.push(a);
-
- });
-
- let html=`
- <table>
- <tr>
- <th>Student</th>
- <th>Present</th>
- <th>Absent</th>
- <th>Total</th>
- </tr>`;
-
- Object.values(map).forEach(s=>{
-
-  const total=s.present+s.absent;
-
-  html+=`
-  <tr>
-   <td>${escapeHtml(s.name)}</td>
-   <td class="present">${s.present}</td>
-   <td class="absent">${s.absent}</td>
-   <td>${total}</td>
-  </tr>`;
-
- });
-
- html+="</table>";
-
- document.getElementById("historyTable").innerHTML=html;
+});
 
 }
 
 
-/* =====================================================
-   PDF
-===================================================== */
+window.paymentModeChanged=function(){
 
-async function makeAttendancePDF(){
+const mode=document.getElementById("paymentMode").value;
 
- const cls=document.getElementById("historyClass").value;
+document.getElementById("utrBox").style.display=
+mode==="Online"?"block":"none";
 
- if(!cls){
-  alert("Class select karo");
-  return;
- }
+if(mode!=="Online"){
+document.getElementById("utrNumber").value="";
+}
 
- await loadHistory();
+};
 
- const {jsPDF}=window.jspdf;
 
- const pdf=new jsPDF();
+window.showStudentFeeInfo=function(){
 
- pdf.setFontSize(18);
- pdf.text("LAW INTERNATIONAL SCHOOL",20,20);
+const id=document.getElementById("paymentStudent").value;
 
- pdf.setFontSize(13);
- pdf.text("Attendance Report",20,30);
+const box=document.getElementById("studentFeeInfo");
 
- pdf.text(
-  "Class: "+cls+
-  " | Subject: "+currentTeacher.subject,
- 20,40
- );
+if(!id){
 
- let y=55;
+box.innerHTML="";
+return;
 
- pdf.text("Student",20,y);
- pdf.text("Present",100,y);
- pdf.text("Absent",135,y);
- pdf.text("Total",170,y);
+}
 
- y+=10;
+const s=students.find(x=>String(x.id)===String(id));
+const st=getFeeStats(id);
 
- const rows=document.querySelectorAll("#historyTable tr");
+box.innerHTML=`
 
- rows.forEach((row,index)=>{
+<div style="
+background:#eff6ff;
+padding:15px;
+border-radius:10px;
+margin:10px 0 15px">
 
-  if(index===0)return;
+<b>${s?.name||""}</b><br>
+Monthly Fee: ₹${st.monthly}<br>
+Total Fee Due: ₹${st.totalDue}<br>
+Total Paid: ₹${st.paid}<br>
+<strong>Remaining Due: ₹${st.remaining}</strong>
 
-  const cells=row.querySelectorAll("td");
+</div>
 
-  if(cells.length>=4){
+`;
 
-   pdf.text(cells[0].innerText,20,y);
-   pdf.text(cells[1].innerText,100,y);
-   pdf.text(cells[2].innerText,135,y);
-   pdf.text(cells[3].innerText,170,y);
+};
 
-   y+=8;
 
-   if(y>280){
-    pdf.addPage();
-    y=20;
-   }
+window.savePayment=async function(){
 
-  }
+const studentId=document.getElementById("paymentStudent").value;
+const date=document.getElementById("paymentDate").value;
+const amount=Number(document.getElementById("paymentAmount").value);
+const mode=document.getElementById("paymentMode").value;
+const utr=document.getElementById("utrNumber").value.trim();
 
- });
+if(!studentId||!date||!amount){
 
- pdf.save(
-  "Attendance-"+cls+"-"+todayString()+".pdf"
- );
+alert("Student, Date aur Amount bharna zaroori hai.");
+return;
+
+}
+
+if(mode==="Online"&&!utr){
+
+alert("Online payment ke liye UTR Number zaroori hai.");
+return;
+
+}
+
+const student=students.find(s=>
+String(s.id)===String(studentId)
+);
+
+const receiptNo=
+"LAW-"+Date.now().toString().slice(-8);
+
+const data={
+studentId,
+studentName:student.name,
+className:student.className,
+section:student.section,
+date,
+amount,
+mode,
+utr:mode==="Online"?utr:"",
+receiptNo,
+createdAt:new Date().toISOString()
+};
+
+const ref=await addDoc(
+collection(db,"payments"),
+data
+);
+
+payments.push({
+docId:ref.id,
+...data
+});
+
+document.getElementById("paymentAmount").value="";
+document.getElementById("utrNumber").value="";
+
+showStudentFeeInfo();
+showFeeRecords();
+displayFeeStatus();
+updateDashboard();
+
+alert("✅ Payment saved.\nReceipt No: "+receiptNo);
+
+};
+
+
+/* ================= FEE RECORD ================= */
+
+window.showFeeRecords=function(){
+
+const studentId=document.getElementById("recordStudent").value;
+const mode=document.getElementById("recordMode").value;
+
+const box=document.getElementById("feeRecordTable");
+
+if(!studentId){
+
+box.innerHTML="<p>Select a student to see his/her fee records.</p>";
+return;
+
+}
+
+const student=students.find(s=>
+String(s.id)===String(studentId)
+);
+
+const st=getFeeStats(studentId);
+
+let records=payments.filter(p=>
+String(p.studentId)===String(studentId)
+);
+
+if(mode){
+records=records.filter(p=>p.mode===mode);
+}
+
+records.sort((a,b)=>
+String(b.date).localeCompare(String(a.date))
+);
+
+
+let html=`
+
+<div class="panel" style="background:#eff6ff">
+
+<b>Student:</b> ${student?.name||""}<br>
+<b>Class:</b> ${student?.className||""} -
+${student?.section||""}<br>
+<b>Monthly Fee:</b> ₹${st.monthly}<br>
+<b>Total Due:</b> ₹${st.totalDue}<br>
+<b>Total Paid:</b> ₹${st.paid}<br>
+<b>Remaining:</b> ₹${st.remaining}
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Date</th>
+<th>Receipt</th>
+<th>Amount</th>
+<th>Mode</th>
+<th>UTR</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody>
+`;
+
+
+records.forEach(p=>{
+
+html+=`
+
+<tr>
+
+<td>${p.date}</td>
+
+<td>${p.receiptNo}</td>
+
+<td><b>₹${p.amount}</b></td>
+
+<td>
+${p.mode==="Online"?"💳 Online":"💵 Cash"}
+</td>
+
+<td>${p.mode==="Online"?p.utr:"—"}</td>
+
+<td>
+
+<button class="primary"
+onclick="printReceipt('${p.docId}')">
+🧾 Receipt
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+
+html+=`
+</tbody>
+</table>
+`;
+
+box.innerHTML=html;
+
+};
+
+
+/* ================= RECEIPT ================= */
+
+window.printReceipt=function(id){
+
+const p=payments.find(x=>x.docId===id);
+
+if(!p)return;
+
+const s=students.find(x=>
+String(x.id)===String(p.studentId)
+);
+
+const st=getFeeStats(p.studentId);
+
+const receipt=`
+
+<div class="receipt">
+
+<div class="receipt-head">
+
+<h1>LAW INTERNATIONAL SCHOOL</h1>
+
+<p>FEE PAYMENT RECEIPT</p>
+
+</div>
+
+<div class="receipt-row">
+<span><b>Receipt No.</b></span>
+<span>${p.receiptNo}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Date</b></span>
+<span>${p.date}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Student Name</b></span>
+<span>${s?.name||p.studentName}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Student ID</b></span>
+<span>${s?.id||p.studentId}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Class / Section</b></span>
+<span>${s?.className||p.className} / ${s?.section||p.section}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Payment Mode</b></span>
+<span>${p.mode}</span>
+</div>
+
+${p.mode==="Online"?
+
+`<div class="receipt-row">
+<span><b>UTR Number</b></span>
+<span>${p.utr}</span>
+</div>`
+:""}
+
+<div class="receipt-row">
+<span><b>Amount Paid</b></span>
+<span class="receipt-total">₹${p.amount}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Total Paid Till Date</b></span>
+<span>₹${st.paid}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Remaining Due</b></span>
+<span>₹${st.remaining}</span>
+</div>
+
+<br><br>
+
+<p>
+This is a computer generated fee receipt.
+</p>
+
+<br>
+
+<div style="display:flex;justify-content:space-between">
+<span>Parent Signature</span>
+<span>Authorized Signature</span>
+</div>
+
+</div>
+`;
+
+
+document.getElementById("receiptBox").innerHTML=receipt;
+
+document.querySelectorAll(".section")
+.forEach(x=>x.classList.remove("active"));
+
+document.getElementById("receiptSection")
+.classList.add("active");
+
+document.getElementById("pageTitle").innerText="Fee Receipt";
+
+};
+
+
+/* ================= NOTICE ================= */
+
+window.publishNotice=async function(){
+
+const title=document.getElementById("noticeTitle").value.trim();
+const text=document.getElementById("noticeText").value.trim();
+const image=document.getElementById("noticeImage").value.trim();
+
+if(!title||!text){
+
+alert("Title aur Notice likho.");
+return;
+
+}
+
+const data={
+title,
+text,
+image,
+date:today()
+};
+
+const ref=await addDoc(
+collection(db,"notices"),
+data
+);
+
+notices.push({
+docId:ref.id,
+...data
+});
+
+document.getElementById("noticeTitle").value="";
+document.getElementById("noticeText").value="";
+document.getElementById("noticeImage").value="";
+
+displayNotices("noticeList");
+displayNotices("dashboardNotices");
+
+alert("📢 Notice published.");
+
+};
+
+
+function displayNotices(id){
+
+const box=document.getElementById(id);
+
+if(!box)return;
+
+box.innerHTML="";
+
+notices.forEach(n=>{
+
+box.innerHTML+=`
+
+<div class="notice">
+
+<h3>📢 ${n.title}</h3>
+
+<small>${n.date}</small>
+
+<p>${n.text}</p>
+
+${n.image?
+`<img src="${n.image}">`
+:""}
+
+${currentUser==="principal"&&id==="noticeList"?
+
+`<br>
+<button class="delete"
+onclick="deleteNotice('${n.docId}')">
+🗑 Delete
+</button>`
+:""}
+
+</div>
+
+`;
+
+});
 
 }
 
 
-/* =====================================================
-   DASHBOARD
-===================================================== */
+window.deleteNotice=async function(id){
 
-async function loadDashboard(){
+if(!confirm("Notice delete karna hai?"))return;
 
- const snap=await db.collection("students").get();
+await deleteDoc(doc(db,"notices",id));
 
- let dues=0;
- let paid=0;
+notices=notices.filter(n=>n.docId!==id);
 
- snap.forEach(doc=>{
+displayNotices("noticeList");
+displayNotices("dashboardNotices");
 
-  const s=doc.data();
+};
 
-  dues+=Number(s.totalDue||0);
-  paid+=Number(s.totalPaid||0);
 
- });
+/* ================= DASHBOARD ================= */
 
- document.getElementById("totalDues").innerText=
- "₹"+dues.toLocaleString("en-IN");
+function updateDashboard(){
 
- document.getElementById("totalPaid").innerText=
- "₹"+paid.toLocaleString("en-IN");
+document.getElementById("studentCount").innerText=
+students.length;
 
- document.getElementById("studentCount").innerText=
- snap.size;
+document.getElementById("teacherCount").innerText=
+teachers.length;
+
+document.getElementById("presentCount").innerText=
+attendance.filter(a=>
+a.date===today()&&a.status==="Present"
+).length;
+
+
+let dues=0;
+
+students.forEach(s=>{
+dues+=getFeeStats(s.id).remaining;
+});
+
+document.getElementById("duesCount").innerText=
+"₹"+dues;
+
+}
+
+
+/*
+Date automatic update.
+10 तारीख के बाद app open/login होने पर
+pending monthly fee calculation check होगी.
+*/
+
+setInterval(async()=>{
+
+setDates();
+
+if(currentUser){
+
+await processMonthlyFees();
+
+displayFeeStatus();
+updateDashboard();
 
 }
 
+},60000);
 
-/* =====================================================
-   SECURITY DISPLAY HELPER
-===================================================== */
 
-function escapeHtml(value){
-
- return String(value||"")
- .replaceAll("&","&amp;")
- .replaceAll("<","&lt;")
- .replaceAll(">","&gt;")
- .replaceAll('"',"&quot;")
- .replaceAll("'","&#039;");
-
-}
+/* ================= START ================= */
 
 </script>
 
