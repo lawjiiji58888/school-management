@@ -3,521 +3,201 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>LAW90 School Management</title>
+<title>LAW INTERNATIONAL SCHOOL</title>
 
 <style>
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-font-family:Arial,sans-serif
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172033}
+button{border:0;border-radius:9px;padding:10px 15px;font-weight:bold;cursor:pointer}
+input,select,textarea{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:8px;margin:6px 0 14px}
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#07152f,#2563eb);padding:20px}
+.loginbox{background:white;width:410px;padding:35px;border-radius:22px;box-shadow:0 20px 60px #0005}
+.logo{width:75px;height:75px;border-radius:50%;background:#2563eb;color:white;margin:auto;display:flex;align-items:center;justify-content:center;font-size:35px}
+.loginbox h1{text-align:center;font-size:23px}
+.sub{text-align:center;color:#64748b;margin-bottom:25px}
+.loginbox button{width:100%;background:#2563eb;color:white}
+.error{display:none;color:#dc2626;background:#fee2e2;padding:10px;margin-top:12px;border-radius:8px;text-align:center}
 
-body{
-background:#f1f5f9;
-color:#1e293b
-}
+.app{display:none}
+.sidebar{position:fixed;left:0;top:0;width:245px;height:100vh;background:#0f172a;color:white;padding:20px;overflow:auto}
+.sidebar h2{text-align:center;font-size:18px}
+.small{text-align:center;color:#94a3b8;font-size:11px;margin-bottom:25px}
+.nav{display:block;width:100%;background:transparent;color:#cbd5e1;text-align:left;margin:4px 0}
+.nav:hover,.nav.active{background:#2563eb;color:white}
+.logout{background:#dc2626!important;color:white!important;margin-top:20px}
 
-button{
-border:0;
-cursor:pointer
-}
+.main{margin-left:245px;padding:22px}
+.top{background:white;padding:18px;border-radius:13px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
+.profile{background:#eff6ff;color:#1d4ed8;padding:10px 14px;border-radius:9px;font-weight:bold}
 
-.login-page{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(135deg,#0f172a,#1d4ed8,#38bdf8)
-}
+.section{display:none}
+.section.active{display:block}
+.panel{background:white;padding:20px;border-radius:14px;margin-bottom:20px;box-shadow:0 2px 10px #0001}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.card{background:white;padding:20px;border-radius:13px;box-shadow:0 2px 10px #0001}
+.card h4{color:#64748b;margin:0 0 10px}
+.card strong{font-size:27px}
 
-.login-box{
-width:390px;
-background:white;
-padding:40px;
-border-radius:22px;
-box-shadow:0 20px 50px #0004
-}
+.primary{background:#2563eb;color:white}
+.green{background:#16a34a;color:white}
+.red{background:#dc2626;color:white}
+.orange{background:#ea580c;color:white}
+.gray{background:#475569;color:white}
+.yellow{background:#f59e0b;color:white}
 
-.logo{
-width:75px;
-height:75px;
-margin:auto auto 18px;
-border-radius:20px;
-background:#2563eb;
-color:white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:30px;
-font-weight:bold
-}
+table{width:100%;border-collapse:collapse;margin-top:15px}
+th,td{padding:11px;border-bottom:1px solid #e2e8f0;text-align:left}
+th{background:#eff6ff}
 
-.login-box h1{
-text-align:center;
-margin-bottom:8px
-}
+.actions{display:flex;gap:5px;flex-wrap:wrap}
+.edit{background:#f59e0b;color:white}
+.delete{background:#dc2626;color:white}
 
-.login-box p{
-text-align:center;
-color:#64748b;
-margin-bottom:28px
-}
+.attbtn{padding:9px 13px;margin:2px}
+.present{background:#dcfce7;color:#15803d}
+.present.selected{background:#16a34a;color:white}
+.absent{background:#fee2e2;color:#dc2626}
+.absent.selected{background:#dc2626;color:white}
 
-label{
-display:block;
-font-weight:bold;
-margin-bottom:7px
-}
+.notice{padding:17px;border:1px solid #e2e8f0;border-radius:10px;margin:10px 0}
+.notice img{max-width:100%;max-height:280px;margin-top:10px;border-radius:8px}
 
-input,select{
-width:100%;
-padding:12px;
-border:1px solid #cbd5e1;
-border-radius:10px;
-margin-bottom:15px;
-outline:none
-}
+.teacherbox{background:#eff6ff;padding:18px;border-radius:12px;margin-bottom:18px}
+.teacherbox h2{margin:0 0 7px;color:#1d4ed8}
 
-input:focus,select:focus{
-border-color:#2563eb
+.receipt{
+background:white;width:750px;max-width:100%;margin:auto;
+padding:30px;border:2px solid #111
 }
+.receipt-head{text-align:center;border-bottom:2px solid #111;padding-bottom:15px}
+.receipt-head h1{margin:0}
+.receipt-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed #aaa}
+.receipt-total{font-size:20px;font-weight:bold}
+.no-print{margin-bottom:20px}
 
-.login-btn,
-.primary-btn{
-background:#2563eb;
-color:white;
-padding:12px 20px;
-border-radius:9px;
-font-weight:bold
-}
-
-.login-btn{
-width:100%
-}
-
-.error{
-display:none;
-color:#dc2626;
-text-align:center;
-margin-top:15px
-}
-
-.dashboard{
-display:none;
-min-height:100vh
-}
-
-.sidebar{
-position:fixed;
-width:250px;
-height:100vh;
-background:#0f172a;
-color:white;
-padding:25px 18px
-}
-
-.sidebar-logo{
-text-align:center;
-font-size:23px;
-font-weight:bold;
-padding-bottom:25px;
-border-bottom:1px solid #334155;
-margin-bottom:25px
-}
-
-.nav-btn{
-width:100%;
-text-align:left;
-padding:14px 16px;
-margin-bottom:8px;
-border-radius:10px;
-background:transparent;
-color:#cbd5e1;
-font-size:15px
-}
-
-.nav-btn:hover,
-.nav-btn.active{
-background:#2563eb;
-color:white
-}
-
-.logout{
-background:#dc2626!important;
-color:white!important;
-margin-top:25px
-}
-
-.main{
-margin-left:250px;
-padding:25px
-}
-
-.topbar{
-background:white;
-border-radius:16px;
-padding:20px 25px;
-margin-bottom:25px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 3px 15px #0001
-}
-
-.admin{
-background:#eff6ff;
-color:#1d4ed8;
-padding:10px 16px;
-border-radius:10px;
-font-weight:bold
-}
-
-.section{
-display:none
-}
-
-.section.active{
-display:block
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:20px;
-margin-bottom:25px
-}
-
-.card,
-.panel{
-background:white;
-border-radius:16px;
-box-shadow:0 3px 15px #0001
-}
-
-.card{
-padding:25px;
-border-left:5px solid #2563eb
-}
-
-.card:nth-child(2){
-border-left-color:#16a34a
-}
-
-.card:nth-child(3){
-border-left-color:#f59e0b
-}
-
-.card:nth-child(4){
-border-left-color:#dc2626
-}
-
-.card h3{
-color:#64748b;
-font-size:14px;
-margin-bottom:12px
-}
-
-.card h2{
-font-size:30px
-}
-
-.panel{
-padding:25px;
-margin-bottom:25px;
-overflow-x:auto
-}
-
-.panel h2{
-margin-bottom:20px
-}
-
-.form-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:5px 20px
-}
-
-.search-row{
-display:flex;
-gap:10px
-}
-
-.search-row input{
-flex:1
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-min-width:700px
-}
-
-th{
-background:#eff6ff;
-color:#1e3a8a;
-padding:13px;
-text-align:left
-}
-
-td{
-padding:12px;
-border-bottom:1px solid #e2e8f0
-}
-
-.green-btn{
-background:#16a34a;
-color:white;
-padding:8px 12px;
-border-radius:8px;
-font-weight:bold
-}
-
-.red-btn{
-background:#dc2626;
-color:white;
-padding:8px 12px;
-border-radius:8px;
-font-weight:bold
-}
-
-.small-btn{
-padding:7px 10px;
-border-radius:7px;
-background:#475569;
-color:white
-}
-
-.attendance-filter{
-display:grid;
-grid-template-columns:1fr 1fr 1fr;
-gap:18px
-}
-
-.stat-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-margin-bottom:20px
-}
-
-.stat{
-background:#f8fafc;
-padding:18px;
-border-radius:12px
-}
-
-.stat h4{
-color:#64748b;
-margin-bottom:8px
-}
-
-.stat strong{
-font-size:25px
-}
-
-.present,
-.paid{
-color:#16a34a;
-font-weight:bold
-}
-
-.absent,
-.pending{
-color:#dc2626;
-font-weight:bold
-}
-
-.empty{
-text-align:center;
-padding:25px;
-color:#64748b
-}
-
-.welcome{
-background:linear-gradient(135deg,#1d4ed8,#38bdf8);
-color:white;
-padding:35px;
-border-radius:18px;
-margin-bottom:25px
-}
-
-.badge{
-padding:5px 9px;
-border-radius:20px;
-font-size:12px;
-font-weight:bold
-}
-
-.badge.present{
-background:#dcfce7;
-color:#166534
-}
-
-.badge.absent{
-background:#fee2e2;
-color:#991b1b
-}
-
-@media(max-width:1000px){
-.cards{
-grid-template-columns:repeat(2,1fr)
-}
-
-.stat-grid{
-grid-template-columns:repeat(2,1fr)
-}
-}
-
-@media(max-width:700px){
-.sidebar{
-position:relative;
-width:100%;
-height:auto
-}
-
-.main{
-margin-left:0;
-padding:15px
-}
-
-.cards,
-.stat-grid,
-.form-grid,
-.attendance-filter{
-grid-template-columns:1fr
-}
-
-.topbar{
-flex-direction:column;
-gap:12px;
-text-align:center
-}
+@media(max-width:850px){
+.sidebar{position:relative;width:100%;height:auto}
+.main{margin-left:0}
+.cards{grid-template-columns:1fr 1fr}
+.grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<div class="login-page" id="loginPage">
+<!-- LOGIN -->
 
-<div class="login-box">
+<div class="login" id="loginPage">
+<div class="loginbox">
 
-<div class="logo">L</div>
+<div class="logo">🏫</div>
 
-<h1>LAW90 SCHOOL</h1>
+<h1>LAW INTERNATIONAL SCHOOL</h1>
+<div class="sub">School Management System</div>
 
-<p>School Management System</p>
+<label>Login As</label>
+<select id="loginRole">
+<option value="principal">👨‍💼 Principal</option>
+<option value="teacher">👩‍🏫 Teacher</option>
+</select>
 
-<label>Username</label>
-<input id="username" placeholder="Username">
+<label>ID</label>
+<input id="loginUser" placeholder="Enter ID">
 
 <label>Password</label>
-<input id="password" type="password" placeholder="Password">
+<input id="loginPass" type="password" placeholder="Enter Password">
 
-<button class="login-btn" onclick="login()">LOGIN</button>
+<button onclick="login()">LOGIN</button>
 
 <div class="error" id="loginError">
-Wrong Username or Password
+Wrong ID / Password
 </div>
 
 </div>
 </div>
 
 
-<div class="dashboard" id="dashboard">
+<!-- APP -->
+
+<div class="app" id="app">
 
 <aside class="sidebar">
 
-<div class="sidebar-logo">
-🏫 LAW90 SCHOOL
+<h2>🏫 LAW INTERNATIONAL</h2>
+<div class="small">SCHOOL MANAGEMENT SYSTEM</div>
+
+<div id="principalMenu">
+
+<button class="nav active" onclick="showSection('dashboard',this)">🏠 Dashboard</button>
+<button class="nav" onclick="showSection('students',this)">👨‍🎓 Students</button>
+<button class="nav" onclick="showSection('teachers',this)">👩‍🏫 Teachers</button>
+<button class="nav" onclick="showSection('attendance',this)">📅 Attendance</button>
+<button class="nav" onclick="showSection('fees',this)">💰 Fees</button>
+<button class="nav" onclick="showSection('feeRecords',this)">🧾 Fee Records</button>
+<button class="nav" onclick="showSection('notices',this)">📢 Notice Board</button>
+
 </div>
 
-<button class="nav-btn active"
-onclick="showSection('home',this)">
-🏠 Dashboard
-</button>
+<div id="teacherMenu" style="display:none">
 
-<button class="nav-btn"
-onclick="showSection('students',this)">
-👨‍🎓 Students
-</button>
+<button class="nav active" onclick="showSection('teacherAttendance',this)">📅 Attendance</button>
+<button class="nav" onclick="showSection('teacherReport',this)">📊 Attendance Report</button>
+<button class="nav" onclick="showSection('teacherNotices',this)">📢 Notice Board</button>
 
-<button class="nav-btn"
-onclick="showSection('teachers',this)">
-👨‍🏫 Teachers
-</button>
+</div>
 
-<button class="nav-btn"
-onclick="showSection('attendance',this)">
-📅 Attendance
-</button>
-
-<button class="nav-btn"
-onclick="showSection('fees',this)">
-💰 Fees
-</button>
-
-<button class="nav-btn logout"
-onclick="logout()">
-🚪 Logout
-</button>
+<button class="nav logout" onclick="logout()">🚪 Logout</button>
 
 </aside>
 
 
 <main class="main">
 
-<div class="topbar">
-
-<h1>School Management System</h1>
-
-<div class="admin">
-ADMIN • LAW90
-</div>
-
+<div class="top">
+<h2 id="pageTitle">Dashboard</h2>
+<div class="profile" id="profile">PRINCIPAL</div>
 </div>
 
 
-<section class="section active" id="home">
+<!-- DASHBOARD -->
 
-<div class="welcome">
-
-<h2>Welcome LAW90 👋</h2>
-
-<p>
-Students • Teachers • Attendance • Fees
-</p>
-
-</div>
-
+<section class="section active" id="dashboard">
 
 <div class="cards">
 
 <div class="card">
-<h3>Total Students</h3>
-<h2 id="studentCount">0</h2>
+<h4>Total Students</h4>
+<strong id="studentCount">0</strong>
 </div>
 
 <div class="card">
-<h3>Total Teachers</h3>
-<h2 id="teacherCount">0</h2>
+<h4>Total Teachers</h4>
+<strong id="teacherCount">0</strong>
 </div>
 
 <div class="card">
-<h3>Present Today</h3>
-<h2 id="presentCount">0</h2>
+<h4>Present Today</h4>
+<strong id="presentCount">0</strong>
 </div>
 
 <div class="card">
-<h3>Total Dues</h3>
-<h2 id="pendingFees">₹0</h2>
+<h4>Total Dues</h4>
+<strong id="duesCount">₹0</strong>
 </div>
 
+</div>
+
+<div class="panel">
+<h2>📢 Latest Notices</h2>
+<div id="dashboardNotices"></div>
 </div>
 
 </section>
 
+
+<!-- STUDENTS -->
 
 <section class="section" id="students">
 
@@ -525,409 +205,225 @@ Students • Teachers • Attendance • Fees
 
 <h2>➕ Add Student</h2>
 
-<div class="form-grid">
+<div class="grid">
 
 <div>
 <label>Student ID</label>
-<input id="studentId" type="number">
+<input id="sid">
 </div>
 
 <div>
-<label>Name</label>
-<input id="studentName">
+<label>Student Name</label>
+<input id="sname">
 </div>
 
 <div>
 <label>Class</label>
-<input id="studentClass">
+<select id="sclass">
+<option value="">Select Class</option>
+<option>Nursery</option><option>LKG</option><option>UKG</option>
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option><option>6</option>
+<option>7</option><option>8</option><option>9</option>
+<option>10</option><option>11</option><option>12</option>
+</select>
 </div>
 
 <div>
 <label>Section</label>
-<input id="studentSection">
-</div>
-
-<div>
-<label>Age</label>
-<input id="studentAge" type="number">
+<select id="ssection">
+<option value="">Select Section</option>
+<option>A</option><option>B</option><option>C</option><option>D</option>
+</select>
 </div>
 
 <div>
 <label>Father Name</label>
-<input id="fatherName">
+<input id="sfather">
 </div>
 
 <div>
 <label>Phone</label>
-<input id="studentPhone">
-</div>
-
-<div>
-<label>Address</label>
-<input id="studentAddress">
+<input id="sphone">
 </div>
 
 </div>
 
-<button class="primary-btn"
-onclick="addStudent()">
-Add Student
-</button>
+<button class="primary" onclick="addStudent()">➕ ADD STUDENT</button>
 
 </div>
-
-
-<div class="panel">
-
-<h2>🔎 Search Student</h2>
-
-<div class="search-row">
-
-<input id="studentSearch"
-placeholder="Search by ID or Name">
-
-<button class="primary-btn"
-onclick="searchStudent()">
-Search
-</button>
-
-<button class="primary-btn"
-onclick="displayStudents()">
-All
-</button>
-
-</div>
-
-</div>
-
 
 <div class="panel">
 
 <h2>👨‍🎓 Student List</h2>
 
 <table>
-
 <thead>
-
 <tr>
 <th>ID</th>
 <th>Name</th>
 <th>Class</th>
 <th>Section</th>
-<th>Age</th>
 <th>Father</th>
 <th>Phone</th>
 <th>Action</th>
 </tr>
-
 </thead>
 
 <tbody id="studentTable"></tbody>
-
 </table>
 
 </div>
 
 </section>
 
+
+<!-- TEACHERS -->
 
 <section class="section" id="teachers">
 
 <div class="panel">
 
-<h2>➕ Add Teacher</h2>
+<h2>👩‍🏫 Create Teacher Login</h2>
 
-<div class="form-grid">
-
-<div>
-<label>Teacher ID</label>
-<input id="teacherId" type="number">
-</div>
+<div class="grid">
 
 <div>
 <label>Teacher Name</label>
-<input id="teacherName">
+<input id="tname">
 </div>
 
 <div>
 <label>Subject</label>
-<input id="teacherSubject">
+<input id="tsubject">
 </div>
 
 <div>
-<label>Phone</label>
-<input id="teacherPhone">
+<label>Login ID</label>
+<input id="tid">
+</div>
+
+<div>
+<label>Password</label>
+<input id="tpassword">
 </div>
 
 </div>
 
-<button class="primary-btn"
-onclick="addTeacher()">
-Add Teacher
-</button>
+<button class="primary" onclick="addTeacher()">CREATE TEACHER LOGIN</button>
 
 </div>
-
 
 <div class="panel">
 
-<h2>👨‍🏫 Teacher List</h2>
+<h2>Teacher Accounts</h2>
 
 <table>
-
 <thead>
-
 <tr>
-<th>ID</th>
 <th>Name</th>
 <th>Subject</th>
-<th>Phone</th>
+<th>Login ID</th>
 <th>Action</th>
 </tr>
-
 </thead>
-
 <tbody id="teacherTable"></tbody>
-
 </table>
 
 </div>
 
 </section>
 
+
+<!-- ADMIN ATTENDANCE -->
 
 <section class="section" id="attendance">
 
 <div class="panel">
 
-<h2>📅 Attendance</h2>
+<h2>📅 Attendance History</h2>
 
-<div class="attendance-filter">
+<div class="grid">
 
 <div>
 <label>Class</label>
-
-<select id="attendanceClass">
-
+<select id="adminClass" onchange="adminAttendance()">
 <option value="">Select Class</option>
-<option>Nursery</option>
-<option>LKG</option>
-<option>UKG</option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-<option>11</option>
-<option>12</option>
-
+<option>Nursery</option><option>LKG</option><option>UKG</option>
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option><option>6</option>
+<option>7</option><option>8</option><option>9</option>
+<option>10</option><option>11</option><option>12</option>
 </select>
-
 </div>
-
 
 <div>
 <label>Section</label>
-
-<select id="attendanceSection">
-
+<select id="adminSection" onchange="adminAttendance()">
 <option value="">Select Section</option>
-<option>A</option>
-<option>B</option>
-<option>C</option>
-<option>D</option>
-
+<option>A</option><option>B</option><option>C</option><option>D</option>
 </select>
-
 </div>
-
 
 <div>
 <label>Date</label>
-
-<input
-id="attendanceDate"
-type="date">
-
+<input type="date" id="adminDate" onchange="adminAttendance()">
 </div>
 
 </div>
-
-<br>
-
-<button class="primary-btn"
-onclick="loadAttendanceStudents()">
-Show Students
-</button>
-
-</div>
-
-
-<div class="panel"
-id="attendanceStudentPanel"
-style="display:none">
-
-<h2>👨‍🎓 Mark Attendance</h2>
 
 <table>
-
 <thead>
-
 <tr>
 <th>ID</th>
-<th>Name</th>
-<th>Class</th>
-<th>Section</th>
-<th>Attendance</th>
-</tr>
-
-</thead>
-
-<tbody id="attendanceStudentTable"></tbody>
-
-</table>
-
-</div>
-
-
-<div class="panel">
-
-<h2>📊 Today's Attendance</h2>
-
-<div class="stat-grid">
-
-<div class="stat">
-<h4>Total</h4>
-<strong id="attendanceTotalStudents">0</strong>
-</div>
-
-<div class="stat">
-<h4>Present</h4>
-<strong class="present"
-id="attendancePresentToday">
-0
-</strong>
-</div>
-
-<div class="stat">
-<h4>Absent</h4>
-<strong class="absent"
-id="attendanceAbsentToday">
-0
-</strong>
-</div>
-
-<div class="stat">
-<h4>Percentage</h4>
-<strong id="attendancePercentage">
-0%
-</strong>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="panel">
-
-<h2>📜 Attendance History</h2>
-
-<select id="historyStudentSelect"
-onchange="showSelectedAttendanceHistory()">
-
-<option value="">
-Select Student
-</option>
-
-</select>
-
-<br><br>
-
-<table>
-
-<thead>
-
-<tr>
-<th>Date</th>
-<th>ID</th>
-<th>Name</th>
+<th>Student</th>
 <th>Class</th>
 <th>Section</th>
 <th>Status</th>
 </tr>
-
 </thead>
-
-<tbody id="attendanceHistoryTable">
-
-<tr>
-<td colspan="6"
-class="empty">
-Select a student
-</td>
-</tr>
-
-</tbody>
-
+<tbody id="adminAttendanceTable"></tbody>
 </table>
 
 </div>
 
 </section>
 
+
+<!-- FEES -->
 
 <section class="section" id="fees">
 
 <div class="panel">
 
-<h2>💰 Fees</h2>
+<h2>💰 Student Fee Setup</h2>
 
-<div class="form-grid">
+<div class="grid">
 
 <div>
-<label>Student</label>
-
-<select id="feesStudentId">
-
-<option value="">
-Select Student
-</option>
-
-</select>
-
+<label>Select Student</label>
+<select id="feeStudent"></select>
 </div>
 
 <div>
-<label>Total Fees</label>
-<input id="totalFees" type="number">
+<label>Monthly Fee</label>
+<input type="number" id="monthlyFee" placeholder="Example 1000">
 </div>
 
 <div>
-<label>Paid Fees</label>
-<input id="paidFees" type="number">
+<label>Initial Paid Amount</label>
+<input type="number" id="initialPaid" value="0">
 </div>
 
 <div>
-<label>Payment Date</label>
-<input id="paymentDate" type="date">
-</div>
-
-<div>
-<label>Due Date</label>
-<input id="dueDate" type="date">
+<label>Fee Start Date</label>
+<input type="date" id="feeStartDate">
 </div>
 
 </div>
 
-<button class="primary-btn"
-onclick="saveFees()">
-Save Fees
+<button class="primary" onclick="saveFeeSetup()">
+💾 SAVE FEE SETUP
 </button>
 
 </div>
@@ -935,104 +431,275 @@ Save Fees
 
 <div class="panel">
 
-<h2>💰 Student Dues</h2>
-
-<select id="duesStudentSelect"
-onchange="showSelectedDues()">
-
-<option value="">
-Select Student
-</option>
-
-</select>
-
-<br><br>
+<h2>💰 Fee Status</h2>
 
 <table>
-
 <thead>
-
 <tr>
-<th>ID</th>
-<th>Name</th>
-<th>Class</th>
-<th>Section</th>
-<th>Total</th>
-<th>Paid</th>
-<th>Dues</th>
-<th>Paid Date</th>
-<th>Due Date</th>
-<th>Status</th>
+<th>Student</th>
+<th>Monthly Fee</th>
+<th>Total Due</th>
+<th>Total Paid</th>
+<th>Remaining</th>
 </tr>
-
 </thead>
 
-<tbody id="feesTable">
-
-<tr>
-<td colspan="10"
-class="empty">
-Select a student
-</td>
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-
-<div class="panel">
-
-<h2>📜 Payment History</h2>
-
-<select id="feesHistoryStudentSelect"
-onchange="showSelectedFeesHistory()">
-
-<option value="">
-Select Student
-</option>
-
-</select>
-
-<br><br>
-
-<table>
-
-<thead>
-
-<tr>
-<th>Date</th>
-<th>ID</th>
-<th>Name</th>
-<th>Amount Paid</th>
-<th>Total</th>
-<th>Dues</th>
-<th>Due Date</th>
-</tr>
-
-</thead>
-
-<tbody id="feesHistoryTable">
-
-<tr>
-<td colspan="7"
-class="empty">
-Select a student
-</td>
-</tr>
-
-</tbody>
-
+<tbody id="feeStatusTable"></tbody>
 </table>
 
 </div>
 
 </section>
 
-</main>
 
+<!-- FEE RECORDS -->
+
+<section class="section" id="feeRecords">
+
+<div class="panel">
+
+<h2>🧾 Add Fee Payment</h2>
+
+<div class="grid">
+
+<div>
+<label>Student</label>
+<select id="paymentStudent" onchange="showStudentFeeInfo()"></select>
+</div>
+
+<div>
+<label>Payment Date</label>
+<input type="date" id="paymentDate">
+</div>
+
+<div>
+<label>Amount</label>
+<input type="number" id="paymentAmount" placeholder="Amount Paid">
+</div>
+
+<div>
+<label>Payment Mode</label>
+
+<select id="paymentMode" onchange="paymentModeChanged()">
+<option value="Cash">💵 Cash</option>
+<option value="Online">💳 Online</option>
+</select>
+
+</div>
+
+<div id="utrBox" style="display:none">
+<label>UTR Number</label>
+<input id="utrNumber" placeholder="Enter UTR Number">
+</div>
+
+</div>
+
+<div id="studentFeeInfo"></div>
+
+<button class="green" onclick="savePayment()">
+💾 SAVE PAYMENT
+</button>
+
+</div>
+
+
+<div class="panel">
+
+<h2>🧾 Fee Payment History</h2>
+
+<div class="grid">
+
+<div>
+<label>Select Student</label>
+<select id="recordStudent" onchange="showFeeRecords()"></select>
+</div>
+
+<div>
+<label>Payment Mode</label>
+<select id="recordMode" onchange="showFeeRecords()">
+<option value="">All</option>
+<option value="Cash">Cash</option>
+<option value="Online">Online</option>
+</select>
+</div>
+
+</div>
+
+<div id="feeRecordTable"></div>
+
+</div>
+
+</section>
+
+
+<!-- NOTICE -->
+
+<section class="section" id="notices">
+
+<div class="panel">
+
+<h2>📢 Notice Board — Admin Only</h2>
+
+<label>Notice Title</label>
+<input id="noticeTitle">
+
+<label>Notice</label>
+<textarea id="noticeText" rows="5"></textarea>
+
+<label>Poster Image URL</label>
+<input id="noticeImage">
+
+<button class="primary" onclick="publishNotice()">
+📢 PUBLISH NOTICE
+</button>
+
+</div>
+
+<div class="panel">
+<h2>Published Notices</h2>
+<div id="noticeList"></div>
+</div>
+
+</section>
+
+
+<!-- TEACHER ATTENDANCE -->
+
+<section class="section" id="teacherAttendance">
+
+<div class="teacherbox">
+
+<h2 id="teacherWelcome">👩‍🏫 Teacher</h2>
+<div id="teacherSubject">Subject: -</div>
+
+</div>
+
+<div class="panel">
+
+<h2>📅 Mark Attendance</h2>
+
+<div class="grid">
+
+<div>
+<label>Class</label>
+<select id="teacherClass" onchange="teacherStudents()">
+<option value="">Select Class</option>
+<option>Nursery</option><option>LKG</option><option>UKG</option>
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option><option>6</option>
+<option>7</option><option>8</option><option>9</option>
+<option>10</option><option>11</option><option>12</option>
+</select>
+</div>
+
+<div>
+<label>Section</label>
+<select id="teacherSection" onchange="teacherStudents()">
+<option value="">Select Section</option>
+<option>A</option><option>B</option><option>C</option><option>D</option>
+</select>
+</div>
+
+<div>
+<label>Date</label>
+<input type="date" id="teacherDate">
+</div>
+
+</div>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Student</th>
+<th>Attendance</th>
+</tr>
+</thead>
+<tbody id="teacherAttendanceTable"></tbody>
+</table>
+
+<button class="primary" onclick="saveAttendance()">
+💾 SAVE ATTENDANCE
+</button>
+
+</div>
+
+</section>
+
+
+<!-- TEACHER REPORT -->
+
+<section class="section" id="teacherReport">
+
+<div class="panel">
+
+<h2>📊 Student Attendance History</h2>
+
+<div class="grid">
+
+<div>
+<label>Class</label>
+<select id="reportClass" onchange="teacherReport()">
+<option value="">Select Class</option>
+<option>Nursery</option><option>LKG</option><option>UKG</option>
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option><option>6</option>
+<option>7</option><option>8</option><option>9</option>
+<option>10</option><option>11</option><option>12</option>
+</select>
+</div>
+
+<div>
+<label>Section</label>
+<select id="reportSection" onchange="teacherReport()">
+<option value="">Select Section</option>
+<option>A</option><option>B</option><option>C</option><option>D</option>
+</select>
+</div>
+
+</div>
+
+<div id="teacherReportTable"></div>
+
+</div>
+
+</section>
+
+
+<!-- TEACHER NOTICE -->
+
+<section class="section" id="teacherNotices">
+
+<div class="panel">
+
+<h2>📢 Notice Board</h2>
+
+<div id="teacherNoticeList"></div>
+
+</div>
+
+</section>
+
+
+<!-- RECEIPT -->
+
+<section class="section" id="receiptSection">
+
+<div class="no-print">
+<button class="gray" onclick="showSection('feeRecords')">
+← Back
+</button>
+<button class="primary" onclick="window.print()">
+🖨 PRINT RECEIPT
+</button>
+</div>
+
+<div id="receiptBox"></div>
+
+</section>
+
+
+</main>
 </div>
 
 
@@ -1053,1541 +720,1599 @@ deleteDoc
 from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
+/* ================= FIREBASE ================= */
+
 const firebaseConfig={
-
-apiKey:
-"AIzaSyA1KBQhTCxrHvkGWy7O3pqjjYpZv4A1uyI",
-
-authDomain:
-"law90-school.firebaseapp.com",
-
-projectId:
-"law90-school",
-
-storageBucket:
-"law90-school.firebasestorage.app",
-
-messagingSenderId:
-"560267717541",
-
-appId:
-"1:560267717541:web:1d105fb165c9dec03ad64c",
-
-measurementId:
-"G-MD10CR9Z47"
-
+apiKey:"AIzaSyA1KBQhTCxrHvkGWy7O3pqjjYpZv4A1uyI",
+authDomain:"law90-school.firebaseapp.com",
+projectId:"law90-school",
+storageBucket:"law90-school.firebasestorage.app",
+messagingSenderId:"560267717541",
+appId:"1:560267717541:web:1d105fb165c9dec03ad64c",
+measurementId:"G-MD10CR9Z47"
 };
 
-
 const app=initializeApp(firebaseConfig);
-
 const db=getFirestore(app);
 
+
+/* ================= VARIABLES ================= */
 
 let students=[];
 let teachers=[];
 let attendance=[];
 let fees=[];
+let payments=[];
+let notices=[];
+
+let currentUser=null;
+let currentTeacher=null;
 
 
-function todayDate(){
+/* ================= DATE ================= */
 
-return new Date()
-.toISOString()
-.split("T")[0];
+function today(){
+
+const d=new Date();
+
+return d.getFullYear()+"-"+
+String(d.getMonth()+1).padStart(2,"0")+"-"+
+String(d.getDate()).padStart(2,"0");
+
+}
+
+function setDates(){
+
+document.getElementById("adminDate").value=today();
+document.getElementById("teacherDate").value=today();
+document.getElementById("paymentDate").value=today();
+document.getElementById("feeStartDate").value=today();
 
 }
 
 
-function setToday(){
+/* ================= LOGIN ================= */
 
-const today=todayDate();
+window.login=async function(){
 
-document.getElementById("attendanceDate").value=today;
+const role=document.getElementById("loginRole").value;
+const id=document.getElementById("loginUser").value.trim();
+const password=document.getElementById("loginPass").value;
 
-document.getElementById("paymentDate").value=today;
+document.getElementById("loginError").style.display="none";
+
+
+/* PRINCIPAL LOGIN */
+
+if(role==="principal"){
+
+/*
+DEFAULT ADMIN LOGIN
+ID: LAW90
+PASSWORD: 9625
+*/
+
+if(id==="LAW90" && password==="9625"){
+
+currentUser="principal";
+startApp();
+return;
+
+}
+
+}
+
+
+/* TEACHER LOGIN */
+
+if(role==="teacher"){
+
+await loadTeachers();
+
+const teacher=teachers.find(t=>
+String(t.loginId)===id &&
+String(t.password)===password
+);
+
+if(teacher){
+
+currentUser="teacher";
+currentTeacher=teacher;
+startApp();
+return;
+
+}
+
+}
+
+
+document.getElementById("loginError").style.display="block";
+
+};
+
+
+function startApp(){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("app").style.display="block";
+
+setDates();
+
+if(currentUser==="teacher"){
+
+document.getElementById("principalMenu").style.display="none";
+document.getElementById("teacherMenu").style.display="block";
+
+document.getElementById("profile").innerText=
+"👩‍🏫 "+currentTeacher.name;
+
+document.getElementById("teacherWelcome").innerText=
+"👩‍🏫 "+currentTeacher.name;
+
+document.getElementById("teacherSubject").innerText=
+"📚 Subject: "+currentTeacher.subject;
+
+showSection("teacherAttendance");
+
+}else{
+
+document.getElementById("principalMenu").style.display="block";
+document.getElementById("teacherMenu").style.display="none";
+
+document.getElementById("profile").innerText="👨‍💼 PRINCIPAL";
+
+}
+
+loadData();
+
+}
+
+
+window.logout=function(){
+
+currentUser=null;
+currentTeacher=null;
+
+document.getElementById("app").style.display="none";
+document.getElementById("loginPage").style.display="flex";
+
+document.getElementById("loginUser").value="";
+document.getElementById("loginPass").value="";
+
+};
+
+
+/* ================= NAVIGATION ================= */
+
+window.showSection=function(id,button){
+
+document.querySelectorAll(".section")
+.forEach(x=>x.classList.remove("active"));
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll(".nav")
+.forEach(x=>x.classList.remove("active"));
+
+if(button)button.classList.add("active");
+
+const titles={
+dashboard:"Dashboard",
+students:"Students",
+teachers:"Teachers",
+attendance:"Attendance",
+fees:"Fees",
+feeRecords:"Fee Records",
+notices:"Notice Board",
+teacherAttendance:"Teacher Attendance",
+teacherReport:"Attendance Report",
+teacherNotices:"Notice Board",
+receiptSection:"Fee Receipt"
+};
+
+document.getElementById("pageTitle").innerText=
+titles[id]||"School";
+
+
+if(id==="feeRecords")fillPaymentStudents();
+if(id==="fees")fillFeeStudents();
+if(id==="teacherAttendance")teacherStudents();
+if(id==="teacherNotices")displayNotices("teacherNoticeList");
+
+};
+
+
+/* ================= LOAD DATA ================= */
+
+async function loadTeachers(){
+
+const snap=await getDocs(collection(db,"teachers"));
+
+teachers=snap.docs.map(d=>({
+docId:d.id,...d.data()
+}));
 
 }
 
 
 async function loadData(){
 
-try{
+let snap=await getDocs(collection(db,"students"));
 
-const s=
-await getDocs(
-collection(db,"students")
-);
+students=snap.docs.map(d=>({
+docId:d.id,...d.data()
+}));
 
-students=
-s.docs.map(d=>({
-docId:d.id,
-...d.data()
+await loadTeachers();
+
+
+snap=await getDocs(collection(db,"attendance"));
+
+attendance=snap.docs.map(d=>({
+docId:d.id,...d.data()
 }));
 
 
-const t=
-await getDocs(
-collection(db,"teachers")
-);
+snap=await getDocs(collection(db,"fees"));
 
-teachers=
-t.docs.map(d=>({
-docId:d.id,
-...d.data()
+fees=snap.docs.map(d=>({
+docId:d.id,...d.data()
 }));
 
 
-const a=
-await getDocs(
-collection(db,"attendance")
-);
+snap=await getDocs(collection(db,"payments"));
 
-attendance=
-a.docs.map(d=>({
-docId:d.id,
-...d.data()
+payments=snap.docs.map(d=>({
+docId:d.id,...d.data()
 }));
 
 
-const f=
-await getDocs(
-collection(db,"fees")
-);
+snap=await getDocs(collection(db,"notices"));
 
-fees=
-f.docs.map(d=>({
-docId:d.id,
-...d.data()
+notices=snap.docs.map(d=>({
+docId:d.id,...d.data()
 }));
 
 
-fillStudentSelects();
+/*
+10 तारीख वाली pending fee calculation
+*/
+
+await processMonthlyFees();
+
+
+if(currentUser==="principal"){
 
 displayStudents();
-
 displayTeachers();
-
-displayAttendance();
-
-displayFees();
-
+fillFeeStudents();
+fillPaymentStudents();
+displayFeeStatus();
+displayNotices("noticeList");
+displayNotices("dashboardNotices");
 updateDashboard();
-
-}catch(error){
-
-console.error(error);
-
-alert(
-"Firebase data load error."
-);
-
-}
-
-}
-
-
-window.login=function(){
-
-const username=
-document.getElementById(
-"username"
-).value.trim();
-
-const password=
-document.getElementById(
-"password"
-).value;
-
-
-if(
-username==="LAW90" &&
-password==="9625"
-){
-
-document.getElementById(
-"loginPage"
-).style.display="none";
-
-document.getElementById(
-"dashboard"
-).style.display="block";
-
-setToday();
-
-loadData();
 
 }else{
 
-document.getElementById(
-"loginError"
-).style.display="block";
+displayNotices("teacherNoticeList");
 
 }
 
-};
+}
 
 
-window.logout=function(){
-
-document.getElementById(
-"dashboard"
-).style.display="none";
-
-document.getElementById(
-"loginPage"
-).style.display="flex";
-
-};
-
-
-window.showSection=function(id,button){
-
-document
-.querySelectorAll(".section")
-.forEach(x=>
-x.classList.remove("active")
-);
-
-document
-.querySelectorAll(".nav-btn")
-.forEach(x=>
-x.classList.remove("active")
-);
-
-document
-.getElementById(id)
-.classList.add("active");
-
-if(button)
-button.classList.add("active");
-
-setToday();
-
-};
-
+/* ================= STUDENTS ================= */
 
 window.addStudent=async function(){
 
-const id=
-Number(
-document.getElementById(
-"studentId"
-).value
-);
+const id=document.getElementById("sid").value.trim();
+const name=document.getElementById("sname").value.trim();
+const className=document.getElementById("sclass").value;
+const section=document.getElementById("ssection").value;
+const father=document.getElementById("sfather").value.trim();
+const phone=document.getElementById("sphone").value.trim();
 
-const name=
-document.getElementById(
-"studentName"
-).value.trim();
+if(!id||!name||!className||!section){
 
-const className=
-document.getElementById(
-"studentClass"
-).value.trim();
-
-const section=
-document.getElementById(
-"studentSection"
-).value.trim();
-
-const age=
-Number(
-document.getElementById(
-"studentAge"
-).value
-);
-
-const father=
-document.getElementById(
-"fatherName"
-).value.trim();
-
-const phone=
-document.getElementById(
-"studentPhone"
-).value.trim();
-
-const address=
-document.getElementById(
-"studentAddress"
-).value.trim();
-
-
-if(
-!id ||
-!name ||
-!className ||
-!section
-){
-
-alert(
-"ID, Name, Class aur Section bharna zaroori hai."
-);
-
+alert("Student ID, Name, Class aur Section bharna zaroori hai.");
 return;
 
 }
 
+if(students.some(s=>String(s.id)===id)){
 
-if(
-students.some(
-s=>s.id===id
-)
-){
-
-alert(
-"Student ID already exists."
-);
-
+alert("Student ID already exists.");
 return;
 
 }
 
-
-const ref=
-await addDoc(
+const ref=await addDoc(
 collection(db,"students"),
-{
-id,
-name,
-className,
-section,
-age,
-father,
-phone,
-address
-}
+{id,name,className,section,father,phone}
 );
-
 
 students.push({
-
 docId:ref.id,
-id,
-name,
-className,
-section,
-age,
-father,
-phone,
-address
-
+id,name,className,section,father,phone
 });
 
-
-document
-.querySelectorAll(
-"#students input"
-)
-.forEach(x=>
-x.value=""
-);
-
-
-fillStudentSelects();
-
 displayStudents();
-
+fillFeeStudents();
+fillPaymentStudents();
 updateDashboard();
 
-alert(
-"Student added successfully!"
-);
+document.getElementById("sid").value="";
+document.getElementById("sname").value="";
+document.getElementById("sclass").value="";
+document.getElementById("ssection").value="";
+document.getElementById("sfather").value="";
+document.getElementById("sphone").value="";
+
+alert("✅ Student added.");
 
 };
 
 
-window.displayStudents=function(list){
+function displayStudents(){
 
-const table=
-document.getElementById(
-"studentTable"
-);
-
+const table=document.getElementById("studentTable");
 table.innerHTML="";
 
-const data=list||students;
+students.forEach(s=>{
 
+table.innerHTML+=`
 
-if(!data.length){
+<tr>
 
-table.innerHTML=
-"<tr><td colspan='8' class='empty'>No students found.</td></tr>";
+<td>${s.id}</td>
+<td><b>${s.name}</b></td>
+<td>${s.className}</td>
+<td>${s.section}</td>
+<td>${s.father||""}</td>
+<td>${s.phone||""}</td>
 
-return;
+<td>
+<div class="actions">
 
-}
+<button class="edit"
+onclick="editStudent('${s.docId}')">
+✏️ Edit
+</button>
 
+<button class="delete"
+onclick="deleteStudent('${s.docId}')">
+🗑 Delete
+</button>
 
-data.forEach(student=>{
+</div>
+</td>
 
-const row=
-table.insertRow();
+</tr>
 
-row.innerHTML=
-
-"<td>"+student.id+"</td>"+
-
-"<td>"+student.name+"</td>"+
-
-"<td>"+student.className+"</td>"+
-
-"<td>"+student.section+"</td>"+
-
-"<td>"+(student.age||"")+"</td>"+
-
-"<td>"+(student.father||"")+"</td>"+
-
-"<td>"+(student.phone||"")+"</td>"+
-
-"<td><button class='red-btn' onclick=\"deleteStudent('"+
-student.docId+
-"')\">Delete</button></td>";
+`;
 
 });
 
-};
-
-
-window.searchStudent=function(){
-
-const value=
-document.getElementById(
-"studentSearch"
-).value
-.toLowerCase()
-.trim();
-
-
-if(!value){
-
-displayStudents();
-
-return;
-
 }
 
 
-const result=
-students.filter(
-student=>
+window.editStudent=async function(id){
 
-String(student.id)
-.includes(value)||
+const s=students.find(x=>x.docId===id);
+if(!s)return;
 
-student.name
-.toLowerCase()
-.includes(value)
+const name=prompt("Student Name:",s.name);
+if(name===null)return;
 
-);
+const cls=prompt("Class:",s.className);
+if(cls===null)return;
 
+const section=prompt("Section:",s.section);
+if(section===null)return;
 
-displayStudents(result);
+const father=prompt("Father Name:",s.father||"");
+if(father===null)return;
+
+const phone=prompt("Phone:",s.phone||"");
+if(phone===null)return;
+
+const data={
+...s,
+name:name.trim(),
+className:cls.trim(),
+section:section.trim(),
+father:father.trim(),
+phone:phone.trim()
+};
+
+delete data.docId;
+
+await setDoc(doc(db,"students",id),data);
+
+Object.assign(s,data);
+
+displayStudents();
+fillFeeStudents();
+fillPaymentStudents();
+
+alert("✅ Student updated.");
 
 };
 
 
 window.deleteStudent=async function(id){
 
-if(
-!confirm(
-"Delete this student?"
-)
-)
-return;
+const s=students.find(x=>x.docId===id);
 
+if(!s)return;
 
-await deleteDoc(
-doc(db,"students",id)
-);
+if(!confirm("Delete "+s.name+"?"))return;
 
+await deleteDoc(doc(db,"students",id));
 
-students=
-students.filter(
-s=>s.docId!==id
-);
-
-
-fillStudentSelects();
+students=students.filter(x=>x.docId!==id);
 
 displayStudents();
-
+fillFeeStudents();
+fillPaymentStudents();
 updateDashboard();
+
+alert("🗑 Student deleted.");
 
 };
 
+
+/* ================= TEACHERS ================= */
 
 window.addTeacher=async function(){
 
-const id=
-Number(
-document.getElementById(
-"teacherId"
-).value
-);
+const name=document.getElementById("tname").value.trim();
+const subject=document.getElementById("tsubject").value.trim();
+const loginId=document.getElementById("tid").value.trim();
+const password=document.getElementById("tpassword").value.trim();
 
-const name=
-document.getElementById(
-"teacherName"
-).value.trim();
+if(!name||!subject||!loginId||!password){
 
-const subject=
-document.getElementById(
-"teacherSubject"
-).value.trim();
-
-const phone=
-document.getElementById(
-"teacherPhone"
-).value.trim();
-
-
-if(!id||!name||!subject){
-
-alert(
-"Teacher ID, Name aur Subject bharna zaroori hai."
-);
-
+alert("All teacher fields are required.");
 return;
 
 }
 
+if(teachers.some(t=>t.loginId===loginId)){
 
-if(
-teachers.some(
-t=>t.id===id
-)
-){
-
-alert(
-"Teacher ID already exists."
-);
-
+alert("Teacher Login ID already exists.");
 return;
 
 }
 
-
-const ref=
-await addDoc(
+const ref=await addDoc(
 collection(db,"teachers"),
-{
-id,
-name,
-subject,
-phone
-}
+{name,subject,loginId,password}
 );
-
 
 teachers.push({
-docId:ref.id,
-id,
-name,
-subject,
-phone
+docId:ref.id,name,subject,loginId,password
 });
 
-
-document
-.querySelectorAll(
-"#teachers input"
-)
-.forEach(x=>
-x.value=""
-);
-
-
 displayTeachers();
-
 updateDashboard();
 
-alert(
-"Teacher added successfully!"
-);
+document.getElementById("tname").value="";
+document.getElementById("tsubject").value="";
+document.getElementById("tid").value="";
+document.getElementById("tpassword").value="";
+
+alert("✅ Teacher login created.");
 
 };
 
 
-window.displayTeachers=function(){
+function displayTeachers(){
 
-const table=
-document.getElementById(
-"teacherTable"
-);
-
+const table=document.getElementById("teacherTable");
 table.innerHTML="";
 
+teachers.forEach(t=>{
 
-if(!teachers.length){
+table.innerHTML+=`
 
-table.innerHTML=
-"<tr><td colspan='5' class='empty'>No teachers found.</td></tr>";
+<tr>
 
-return;
+<td>${t.name}</td>
+<td>${t.subject}</td>
+<td>${t.loginId}</td>
+
+<td>
+
+<div class="actions">
+
+<button class="edit"
+onclick="editTeacher('${t.docId}')">
+✏️ Edit
+</button>
+
+<button class="delete"
+onclick="deleteTeacher('${t.docId}')">
+🗑 Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`;
+
+});
 
 }
 
 
-teachers.forEach(t=>{
+window.editTeacher=async function(id){
 
-const row=
-table.insertRow();
+const t=teachers.find(x=>x.docId===id);
+if(!t)return;
 
-row.innerHTML=
+const name=prompt("Teacher Name:",t.name);
+if(name===null)return;
 
-"<td>"+t.id+"</td>"+
+const subject=prompt("Subject:",t.subject);
+if(subject===null)return;
 
-"<td>"+t.name+"</td>"+
+const loginId=prompt("Login ID:",t.loginId);
+if(loginId===null)return;
 
-"<td>"+t.subject+"</td>"+
+const password=prompt("Password:",t.password);
+if(password===null)return;
 
-"<td>"+(t.phone||"")+"</td>"+
+const data={
+name:name.trim(),
+subject:subject.trim(),
+loginId:loginId.trim(),
+password:password.trim()
+};
 
-"<td><button class='red-btn' onclick=\"deleteTeacher('"+
-t.docId+
-"')\">Delete</button></td>";
+await setDoc(doc(db,"teachers",id),data);
 
-});
+Object.assign(t,data);
+
+displayTeachers();
+
+alert("✅ Teacher updated.");
 
 };
 
 
 window.deleteTeacher=async function(id){
 
-if(
-!confirm(
-"Delete this teacher?"
-)
-)
-return;
+const t=teachers.find(x=>x.docId===id);
 
+if(!t)return;
 
-await deleteDoc(
-doc(db,"teachers",id)
-);
+if(!confirm("Delete teacher "+t.name+"?"))return;
 
+await deleteDoc(doc(db,"teachers",id));
 
-teachers=
-teachers.filter(
-t=>t.docId!==id
-);
-
+teachers=teachers.filter(x=>x.docId!==id);
 
 displayTeachers();
-
 updateDashboard();
 
-};
-
-
-window.fillStudentSelects=function(){
-
-const selects=[
-
-document.getElementById(
-"historyStudentSelect"
-),
-
-document.getElementById(
-"duesStudentSelect"
-),
-
-document.getElementById(
-"feesHistoryStudentSelect"
-),
-
-document.getElementById(
-"feesStudentId"
-)
-
-];
-
-
-selects.forEach(select=>{
-
-if(!select)
-return;
-
-
-select.innerHTML=
-"<option value=''>Select Student</option>";
-
-
-students.forEach(student=>{
-
-const option=
-document.createElement(
-"option"
-);
-
-option.value=
-student.id;
-
-option.textContent=
-student.id+
-" - "+
-student.name+
-" | Class "+
-student.className+
-" - "+
-student.section;
-
-select.appendChild(
-option
-);
-
-});
-
-});
+alert("🗑 Teacher deleted.");
 
 };
 
 
-window.loadAttendanceStudents=function(){
+/* ================= ATTENDANCE ================= */
 
-const className=
-document.getElementById(
-"attendanceClass"
-).value;
+window.teacherStudents=function(){
 
-const section=
-document.getElementById(
-"attendanceSection"
-).value;
+if(currentUser!=="teacher")return;
 
-const date=
-document.getElementById(
-"attendanceDate"
-).value;
+const cls=document.getElementById("teacherClass").value;
+const section=document.getElementById("teacherSection").value;
+const date=document.getElementById("teacherDate").value;
 
-
-if(
-!className||
-!section||
-!date
-){
-
-alert(
-"Class, Section aur Date select karo."
-);
-
-return;
-
-}
-
-
-const filtered=
-students.filter(
-student=>
-
-student.className
-.toLowerCase()===
-className.toLowerCase()&&
-
-student.section
-.toLowerCase()===
-section.toLowerCase()
-
-);
-
-
-document.getElementById(
-"attendanceStudentPanel"
-).style.display=
-"block";
-
-
-const table=
-document.getElementById(
-"attendanceStudentTable"
-);
+const table=document.getElementById("teacherAttendanceTable");
 
 table.innerHTML="";
 
+if(!cls||!section)return;
 
-if(!filtered.length){
+students.filter(s=>
+String(s.className)===String(cls)&&
+String(s.section)===String(section)
+).forEach(s=>{
 
-table.innerHTML=
-"<tr><td colspan='5' class='empty'>Student nahi mila.</td></tr>";
-
-return;
-
-}
-
-
-filtered.forEach(student=>{
-
-const old=
-attendance.find(
-a=>
-a.studentId===
-student.id&&
-a.date===
-date
+const old=attendance.find(a=>
+String(a.studentId)===String(s.id)&&
+a.date===date
 );
 
+const status=old?old.status:"";
 
-const row=
-table.insertRow();
+table.innerHTML+=`
 
+<tr>
 
-row.innerHTML=
+<td>${s.id}</td>
+<td><b>${s.name}</b></td>
 
-"<td>"+student.id+"</td>"+
+<td>
 
-"<td>"+student.name+"</td>"+
+<button class="attbtn present ${status==="Present"?"selected":""}"
+onclick="chooseAttendance('${s.id}','Present',this)">
+✓ PRESENT
+</button>
 
-"<td>"+student.className+"</td>"+
+<button class="attbtn absent ${status==="Absent"?"selected":""}"
+onclick="chooseAttendance('${s.id}','Absent',this)">
+✕ ABSENT
+</button>
 
-"<td>"+student.section+"</td>"+
+<input type="hidden" id="att_${s.id}" value="${status}">
 
-"<td>"+
+</td>
 
-"<button class='green-btn' onclick=\"saveAttendance("+
-student.id+
-",'Present')\">Present</button> "+
+</tr>
 
-"<button class='red-btn' onclick=\"saveAttendance("+
-student.id+
-",'Absent')\">Absent</button> "+
-
-(old?
-"<b>"+old.status+"</b>":
-"")+
-
-"</td>";
+`;
 
 });
 
 };
 
 
-window.saveAttendance=async function(
-studentId,
-status
-){
+window.chooseAttendance=function(id,status,btn){
 
-const date=
-document.getElementById(
-"attendanceDate"
-).value;
+const parent=btn.parentElement;
 
-const student=
-students.find(
-s=>s.id===studentId
-);
+parent.querySelectorAll(".attbtn")
+.forEach(x=>x.classList.remove("selected"));
+
+btn.classList.add("selected");
+
+document.getElementById("att_"+id).value=status;
+
+};
 
 
-if(!student||!date)
+window.saveAttendance=async function(){
+
+const cls=document.getElementById("teacherClass").value;
+const section=document.getElementById("teacherSection").value;
+const date=document.getElementById("teacherDate").value;
+
+if(!cls||!section){
+
+alert("Class aur Section select karo.");
 return;
 
+}
 
-const old=
-attendance.find(
-a=>
-a.studentId===
-studentId&&
-a.date===
-date
+const list=students.filter(s=>
+String(s.className)===String(cls)&&
+String(s.section)===String(section)
 );
 
+for(const s of list){
+
+const status=document.getElementById("att_"+s.id)?.value;
+
+if(!status)continue;
+
+const old=attendance.find(a=>
+String(a.studentId)===String(s.id)&&
+a.date===date
+);
 
 const data={
-
-studentId,
-status,
+studentId:s.id,
+studentName:s.name,
+className:s.className,
+section:s.section,
 date,
-name:student.name,
-className:student.className,
-section:student.section
-
+status,
+markedBy:currentTeacher.name
 };
-
 
 if(old){
 
-await setDoc(
-doc(db,"attendance",old.docId),
-data
-);
-
-old.status=status;
+await setDoc(doc(db,"attendance",old.docId),data);
+Object.assign(old,data);
 
 }else{
 
-const ref=
-await addDoc(
-collection(db,"attendance"),
-data
-);
+const ref=await addDoc(collection(db,"attendance"),data);
 
 attendance.push({
-
-docId:ref.id,
-...data
-
+docId:ref.id,...data
 });
 
 }
 
+}
 
-displayAttendance();
-
-updateDashboard();
-
-loadAttendanceStudents();
-
-showSelectedAttendanceHistory();
+alert("✅ Attendance saved.");
+teacherStudents();
 
 };
 
 
-window.displayAttendance=function(){
+/* ADMIN ATTENDANCE */
 
-const today=
-todayDate();
+window.adminAttendance=function(){
 
+const cls=document.getElementById("adminClass").value;
+const section=document.getElementById("adminSection").value;
+const date=document.getElementById("adminDate").value;
 
-const present=
-attendance.filter(
-a=>
-a.date===
-today&&
-a.status===
-"Present"
-).length;
-
-
-const absent=
-attendance.filter(
-a=>
-a.date===
-today&&
-a.status===
-"Absent"
-).length;
-
-
-const total=
-present+absent;
-
-
-const percentage=
-total?
-((present/total)*100)
-.toFixed(1):
-0;
-
-
-document.getElementById(
-"attendanceTotalStudents"
-).innerText=
-students.length;
-
-document.getElementById(
-"attendancePresentToday"
-).innerText=
-present;
-
-document.getElementById(
-"attendanceAbsentToday"
-).innerText=
-absent;
-
-document.getElementById(
-"attendancePercentage"
-).innerText=
-percentage+"%";
-
-};
-
-
-window.showSelectedAttendanceHistory=function(){
-
-const studentId=
-Number(
-document.getElementById(
-"historyStudentSelect"
-).value
-);
-
-
-const table=
-document.getElementById(
-"attendanceHistoryTable"
-);
-
+const table=document.getElementById("adminAttendanceTable");
 
 table.innerHTML="";
 
+if(!cls||!section)return;
 
-if(!studentId){
+students.filter(s=>
+String(s.className)===String(cls)&&
+String(s.section)===String(section)
+).forEach(s=>{
 
-table.innerHTML=
-"<tr><td colspan='6' class='empty'>Select a student</td></tr>";
-
-return;
-
-}
-
-
-const student=
-students.find(
-s=>s.id===studentId
+const a=attendance.find(x=>
+String(x.studentId)===String(s.id)&&
+x.date===date
 );
 
+table.innerHTML+=`
 
-const records=
-attendance
-.filter(
-a=>a.studentId===studentId
-)
-.sort(
-(a,b)=>
-b.date.localeCompare(a.date)
-);
+<tr>
+<td>${s.id}</td>
+<td>${s.name}</td>
+<td>${s.className}</td>
+<td>${s.section}</td>
+<td>
+<b style="color:${
+a?.status==="Present"?"green":
+a?.status==="Absent"?"red":"#64748b"
+}">
+${a?.status||"Not Marked"}
+</b>
+</td>
+</tr>
 
-
-if(!records.length){
-
-table.innerHTML=
-"<tr><td colspan='6' class='empty'>Is student ki attendance history nahi hai.</td></tr>";
-
-return;
-
-}
-
-
-records.forEach(record=>{
-
-const row=
-table.insertRow();
-
-row.innerHTML=
-
-"<td>"+record.date+"</td>"+
-
-"<td>"+student.id+"</td>"+
-
-"<td>"+student.name+"</td>"+
-
-"<td>"+student.className+"</td>"+
-
-"<td>"+student.section+"</td>"+
-
-"<td class='"+
-
-(record.status==="Present"?
-"present":
-"absent")+
-
-"'>"+record.status+"</td>";
+`;
 
 });
 
 };
 
 
-window.saveFees=async function(){
+/* TEACHER REPORT */
 
-const studentId=
-Number(
-document.getElementById(
-"feesStudentId"
-).value
-);
+window.teacherReport=function(){
 
-const total=
-Number(
-document.getElementById(
-"totalFees"
-).value
-);
+const cls=document.getElementById("reportClass").value;
+const section=document.getElementById("reportSection").value;
 
-const paid=
-Number(
-document.getElementById(
-"paidFees"
-).value
-);
+const box=document.getElementById("teacherReportTable");
 
-const paymentDate=
-document.getElementById(
-"paymentDate"
-).value;
+if(!cls||!section){
 
-const dueDate=
-document.getElementById(
-"dueDate"
-).value;
-
-
-const student=
-students.find(
-s=>s.id===studentId
-);
-
-
-if(!student){
-
-alert(
-"Student select karo."
-);
-
+box.innerHTML="";
 return;
 
 }
 
-
-if(
-total<=0||
-paid<0||
-paid>total
-){
-
-alert(
-"Fees amount valid nahi hai."
+const list=students.filter(s=>
+String(s.className)===String(cls)&&
+String(s.section)===String(section)
 );
 
-return;
+let html=`
 
-}
+<table>
 
+<thead>
+<tr>
+<th>Student</th>
+<th>Present</th>
+<th>Absent</th>
+<th>Total</th>
+</tr>
+</thead>
 
-if(!paymentDate||!dueDate){
+<tbody>
+`;
 
-alert(
-"Payment Date aur Due Date select karo."
+list.forEach(s=>{
+
+const records=attendance.filter(a=>
+String(a.studentId)===String(s.id)
 );
 
-return;
+const p=records.filter(a=>a.status==="Present").length;
+const ab=records.filter(a=>a.status==="Absent").length;
 
-}
+html+=`
 
+<tr>
+<td><b>${s.name}</b></td>
+<td style="color:green">✓ ${p}</td>
+<td style="color:red">✕ ${ab}</td>
+<td>${p+ab}</td>
+</tr>
 
-const remaining=
-total-paid;
+`;
 
+});
 
-let old=
-fees.find(
-f=>f.studentId===studentId
-);
+html+="</tbody></table>";
 
-
-const payment={
-
-date:paymentDate,
-amount:paid,
-total:total,
-remaining:remaining,
-dueDate:dueDate
+box.innerHTML=html;
 
 };
 
+
+/* ================= FEES ================= */
+
+/*
+Har student ki fee setup.
+10 तारीख ko monthly fee automatically add
+hogee jab system login/open hoga.
+*/
+
+window.saveFeeSetup=async function(){
+
+const studentId=document.getElementById("feeStudent").value;
+const monthly=Number(document.getElementById("monthlyFee").value);
+const initialPaid=Number(document.getElementById("initialPaid").value||0);
+const startDate=document.getElementById("feeStartDate").value;
+
+if(!studentId||!monthly){
+
+alert("Student aur Monthly Fee bharna zaroori hai.");
+return;
+
+}
+
+const old=fees.find(f=>
+String(f.studentId)===String(studentId)
+);
+
+const data={
+studentId,
+monthlyFee:monthly,
+startDate:startDate,
+lastFeeDate:startDate
+};
 
 if(old){
 
-const history=
-old.history||[];
+await setDoc(doc(db,"fees",old.docId),{
+...old,
+...data
+});
 
-history.push(payment);
-
-
-await setDoc(
-doc(db,"fees",old.docId),
-{
-
-studentId,
-total,
-paid,
-remaining,
-paymentDate,
-dueDate,
-history
-
-}
-);
-
-
-old.total=total;
-old.paid=paid;
-old.remaining=remaining;
-old.paymentDate=paymentDate;
-old.dueDate=dueDate;
-old.history=history;
-
+Object.assign(old,data);
 
 }else{
 
-const ref=
-await addDoc(
+const ref=await addDoc(
 collection(db,"fees"),
 {
-
-studentId,
-total,
-paid,
-remaining,
-paymentDate,
-dueDate,
-
-history:[
-payment
-]
-
+...data,
+createdAt:today()
 }
 );
-
 
 fees.push({
-
 docId:ref.id,
-studentId,
-total,
-paid,
-remaining,
-paymentDate,
-dueDate,
-
-history:[
-payment
-]
-
+...data
 });
 
 }
 
-
-document.getElementById(
-"totalFees"
-).value="";
-
-document.getElementById(
-"paidFees"
-).value="";
-
-document.getElementById(
-"dueDate"
-).value="";
-
-
-fillStudentSelects();
-
-displayFees();
-
-showSelectedDues();
-
-showSelectedFeesHistory();
-
+displayFeeStatus();
 updateDashboard();
 
-alert(
-"Fees saved successfully!"
-);
+alert("✅ Fee setup saved.");
 
 };
 
 
-window.showSelectedDues=function(){
+/*
+10 तारीख के बाद जितने महीने pending हैं,
+उतने महीने की fee due calculation में add होगी.
+*/
 
-const studentId=
-Number(
-document.getElementById(
-"duesStudentSelect"
-).value
+async function processMonthlyFees(){
+
+const now=new Date();
+
+if(now.getDate()<10)return;
+
+for(const fee of fees){
+
+if(!fee.monthlyFee||!fee.startDate)continue;
+
+let last=new Date(fee.lastFeeDate||fee.startDate);
+
+let changed=false;
+
+while(true){
+
+let next=new Date(
+last.getFullYear(),
+last.getMonth()+1,
+10
 );
 
+if(next>now)break;
 
-const table=
-document.getElementById(
-"feesTable"
+last=next;
+changed=true;
+
+}
+
+if(changed){
+
+const lastDate=
+last.getFullYear()+"-"+
+String(last.getMonth()+1).padStart(2,"0")+"-10";
+
+await setDoc(
+doc(db,"fees",fee.docId),
+{
+...fee,
+lastFeeDate:lastDate
+}
 );
 
+fee.lastFeeDate=lastDate;
 
-table.innerHTML="";
+}
 
-
-if(!studentId){
-
-table.innerHTML=
-"<tr><td colspan='10' class='empty'>Select a student</td></tr>";
-
-return;
+}
 
 }
 
 
-const student=
-students.find(
-s=>s.id===studentId
+/*
+Due calculation:
+monthly fee × months elapsed after start,
+minus all payments.
+*/
+
+function getFeeStats(studentId){
+
+const fee=fees.find(f=>
+String(f.studentId)===String(studentId)
 );
 
+if(!fee){
 
-const record=
-fees.find(
-f=>f.studentId===studentId
-);
-
-
-if(!record){
-
-table.innerHTML=
-"<tr><td colspan='10' class='empty'>Is student ka fees record nahi hai.</td></tr>";
-
-return;
-
-}
-
-
-const row=
-table.insertRow();
-
-
-row.innerHTML=
-
-"<td>"+student.id+"</td>"+
-
-"<td>"+student.name+"</td>"+
-
-"<td>"+student.className+"</td>"+
-
-"<td>"+student.section+"</td>"+
-
-"<td>₹"+record.total+"</td>"+
-
-"<td>₹"+record.paid+"</td>"+
-
-"<td class='"+
-
-(record.remaining===0?
-"paid":
-"pending")+
-
-"'>₹"+record.remaining+"</td>"+
-
-"<td>"+record.paymentDate+"</td>"+
-
-"<td>"+record.dueDate+"</td>"+
-
-"<td>"+
-
-(record.remaining===0?
-"<span class='paid'>PAID</span>":
-"<span class='pending'>DUE</span>")+
-
-"</td>";
-
+return {
+monthly:0,
+totalDue:0,
+paid:0,
+remaining:0
 };
 
+}
 
-window.showSelectedFeesHistory=function(){
+const start=new Date(fee.startDate);
+const now=new Date();
 
-const studentId=
-Number(
-document.getElementById(
-"feesHistoryStudentSelect"
-).value
-);
+let months=0;
 
+if(now>=start){
 
-const table=
-document.getElementById(
-"feesHistoryTable"
-);
+months=
+(now.getFullYear()-start.getFullYear())*12+
+(now.getMonth()-start.getMonth());
 
+if(now.getDate()>=10)months++;
 
-table.innerHTML="";
+if(months<1)months=1;
 
+}
 
-if(!studentId){
+const totalDue=
+months*Number(fee.monthlyFee||0);
 
-table.innerHTML=
-"<tr><td colspan='7' class='empty'>Select a student</td></tr>";
+const paid=
+payments
+.filter(p=>String(p.studentId)===String(studentId))
+.reduce((sum,p)=>sum+Number(p.amount||0),0);
 
-return;
+return {
+monthly:Number(fee.monthlyFee||0),
+totalDue,
+paid,
+remaining:Math.max(0,totalDue-paid)
+};
 
 }
 
 
-const student=
-students.find(
-s=>s.id===studentId
-);
+/* FEE STUDENT DROPDOWN */
 
+function fillFeeStudents(){
 
-const record=
-fees.find(
-f=>f.studentId===studentId
-);
+const select=document.getElementById("feeStudent");
 
+select.innerHTML=
+'<option value="">Select Student</option>';
 
-if(
-!record||
-!record.history||
-!record.history.length
-){
+students.forEach(s=>{
 
-table.innerHTML=
-"<tr><td colspan='7' class='empty'>Is student ki payment history nahi hai.</td></tr>";
-
-return;
-
-}
-
-
-const history=
-[...record.history]
-.sort(
-(a,b)=>
-b.date.localeCompare(a.date)
-);
-
-
-history.forEach(item=>{
-
-const row=
-table.insertRow();
-
-
-row.innerHTML=
-
-"<td>"+item.date+"</td>"+
-
-"<td>"+student.id+"</td>"+
-
-"<td>"+student.name+"</td>"+
-
-"<td>₹"+item.amount+"</td>"+
-
-"<td>₹"+item.total+"</td>"+
-
-"<td>₹"+item.remaining+"</td>"+
-
-"<td>"+item.dueDate+"</td>";
+select.innerHTML+=`
+<option value="${s.id}">
+${s.id} - ${s.name}
+</option>
+`;
 
 });
 
-};
+displayFeeStatus();
+
+}
 
 
-window.displayFees=function(){
+/* FEE STATUS */
 
-const select=
-document.getElementById(
-"duesStudentSelect"
-);
+function displayFeeStatus(){
+
+const table=document.getElementById("feeStatusTable");
+
+if(!table)return;
+
+table.innerHTML="";
+
+students.forEach(s=>{
+
+const st=getFeeStats(s.id);
+
+table.innerHTML+=`
+
+<tr>
+
+<td><b>${s.name}</b></td>
+<td>₹${st.monthly}</td>
+<td>₹${st.totalDue}</td>
+<td style="color:green">₹${st.paid}</td>
+<td style="color:${st.remaining>0?"red":"green"}">
+₹${st.remaining}
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
 
 
-if(select.value){
+/* ================= PAYMENT ================= */
 
-showSelectedDues();
+function fillPaymentStudents(){
 
-}else{
+const ids=["paymentStudent","recordStudent"];
 
-const table=
-document.getElementById(
-"feesTable"
-);
+ids.forEach(id=>{
 
-table.innerHTML=
-"<tr><td colspan='10' class='empty'>Select a student</td></tr>";
+const select=document.getElementById(id);
 
+if(!select)return;
+
+select.innerHTML=
+'<option value="">Select Student</option>';
+
+students.forEach(s=>{
+
+select.innerHTML+=`
+<option value="${s.id}">
+${s.id} - ${s.name}
+</option>
+`;
+
+});
+
+});
+
+}
+
+
+window.paymentModeChanged=function(){
+
+const mode=document.getElementById("paymentMode").value;
+
+document.getElementById("utrBox").style.display=
+mode==="Online"?"block":"none";
+
+if(mode!=="Online"){
+document.getElementById("utrNumber").value="";
 }
 
 };
 
+
+window.showStudentFeeInfo=function(){
+
+const id=document.getElementById("paymentStudent").value;
+
+const box=document.getElementById("studentFeeInfo");
+
+if(!id){
+
+box.innerHTML="";
+return;
+
+}
+
+const s=students.find(x=>String(x.id)===String(id));
+const st=getFeeStats(id);
+
+box.innerHTML=`
+
+<div style="
+background:#eff6ff;
+padding:15px;
+border-radius:10px;
+margin:10px 0 15px">
+
+<b>${s?.name||""}</b><br>
+Monthly Fee: ₹${st.monthly}<br>
+Total Fee Due: ₹${st.totalDue}<br>
+Total Paid: ₹${st.paid}<br>
+<strong>Remaining Due: ₹${st.remaining}</strong>
+
+</div>
+
+`;
+
+};
+
+
+window.savePayment=async function(){
+
+const studentId=document.getElementById("paymentStudent").value;
+const date=document.getElementById("paymentDate").value;
+const amount=Number(document.getElementById("paymentAmount").value);
+const mode=document.getElementById("paymentMode").value;
+const utr=document.getElementById("utrNumber").value.trim();
+
+if(!studentId||!date||!amount){
+
+alert("Student, Date aur Amount bharna zaroori hai.");
+return;
+
+}
+
+if(mode==="Online"&&!utr){
+
+alert("Online payment ke liye UTR Number zaroori hai.");
+return;
+
+}
+
+const student=students.find(s=>
+String(s.id)===String(studentId)
+);
+
+const receiptNo=
+"LAW-"+Date.now().toString().slice(-8);
+
+const data={
+studentId,
+studentName:student.name,
+className:student.className,
+section:student.section,
+date,
+amount,
+mode,
+utr:mode==="Online"?utr:"",
+receiptNo,
+createdAt:new Date().toISOString()
+};
+
+const ref=await addDoc(
+collection(db,"payments"),
+data
+);
+
+payments.push({
+docId:ref.id,
+...data
+});
+
+document.getElementById("paymentAmount").value="";
+document.getElementById("utrNumber").value="";
+
+showStudentFeeInfo();
+showFeeRecords();
+displayFeeStatus();
+updateDashboard();
+
+alert("✅ Payment saved.\nReceipt No: "+receiptNo);
+
+};
+
+
+/* ================= FEE RECORD ================= */
+
+window.showFeeRecords=function(){
+
+const studentId=document.getElementById("recordStudent").value;
+const mode=document.getElementById("recordMode").value;
+
+const box=document.getElementById("feeRecordTable");
+
+if(!studentId){
+
+box.innerHTML="<p>Select a student to see his/her fee records.</p>";
+return;
+
+}
+
+const student=students.find(s=>
+String(s.id)===String(studentId)
+);
+
+const st=getFeeStats(studentId);
+
+let records=payments.filter(p=>
+String(p.studentId)===String(studentId)
+);
+
+if(mode){
+records=records.filter(p=>p.mode===mode);
+}
+
+records.sort((a,b)=>
+String(b.date).localeCompare(String(a.date))
+);
+
+
+let html=`
+
+<div class="panel" style="background:#eff6ff">
+
+<b>Student:</b> ${student?.name||""}<br>
+<b>Class:</b> ${student?.className||""} -
+${student?.section||""}<br>
+<b>Monthly Fee:</b> ₹${st.monthly}<br>
+<b>Total Due:</b> ₹${st.totalDue}<br>
+<b>Total Paid:</b> ₹${st.paid}<br>
+<b>Remaining:</b> ₹${st.remaining}
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Date</th>
+<th>Receipt</th>
+<th>Amount</th>
+<th>Mode</th>
+<th>UTR</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody>
+`;
+
+
+records.forEach(p=>{
+
+html+=`
+
+<tr>
+
+<td>${p.date}</td>
+
+<td>${p.receiptNo}</td>
+
+<td><b>₹${p.amount}</b></td>
+
+<td>
+${p.mode==="Online"?"💳 Online":"💵 Cash"}
+</td>
+
+<td>${p.mode==="Online"?p.utr:"—"}</td>
+
+<td>
+
+<button class="primary"
+onclick="printReceipt('${p.docId}')">
+🧾 Receipt
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+
+html+=`
+</tbody>
+</table>
+`;
+
+box.innerHTML=html;
+
+};
+
+
+/* ================= RECEIPT ================= */
+
+window.printReceipt=function(id){
+
+const p=payments.find(x=>x.docId===id);
+
+if(!p)return;
+
+const s=students.find(x=>
+String(x.id)===String(p.studentId)
+);
+
+const st=getFeeStats(p.studentId);
+
+const receipt=`
+
+<div class="receipt">
+
+<div class="receipt-head">
+
+<h1>LAW INTERNATIONAL SCHOOL</h1>
+
+<p>FEE PAYMENT RECEIPT</p>
+
+</div>
+
+<div class="receipt-row">
+<span><b>Receipt No.</b></span>
+<span>${p.receiptNo}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Date</b></span>
+<span>${p.date}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Student Name</b></span>
+<span>${s?.name||p.studentName}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Student ID</b></span>
+<span>${s?.id||p.studentId}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Class / Section</b></span>
+<span>${s?.className||p.className} / ${s?.section||p.section}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Payment Mode</b></span>
+<span>${p.mode}</span>
+</div>
+
+${p.mode==="Online"?
+
+`<div class="receipt-row">
+<span><b>UTR Number</b></span>
+<span>${p.utr}</span>
+</div>`
+:""}
+
+<div class="receipt-row">
+<span><b>Amount Paid</b></span>
+<span class="receipt-total">₹${p.amount}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Total Paid Till Date</b></span>
+<span>₹${st.paid}</span>
+</div>
+
+<div class="receipt-row">
+<span><b>Remaining Due</b></span>
+<span>₹${st.remaining}</span>
+</div>
+
+<br><br>
+
+<p>
+This is a computer generated fee receipt.
+</p>
+
+<br>
+
+<div style="display:flex;justify-content:space-between">
+<span>Parent Signature</span>
+<span>Authorized Signature</span>
+</div>
+
+</div>
+`;
+
+
+document.getElementById("receiptBox").innerHTML=receipt;
+
+document.querySelectorAll(".section")
+.forEach(x=>x.classList.remove("active"));
+
+document.getElementById("receiptSection")
+.classList.add("active");
+
+document.getElementById("pageTitle").innerText="Fee Receipt";
+
+};
+
+
+/* ================= NOTICE ================= */
+
+window.publishNotice=async function(){
+
+const title=document.getElementById("noticeTitle").value.trim();
+const text=document.getElementById("noticeText").value.trim();
+const image=document.getElementById("noticeImage").value.trim();
+
+if(!title||!text){
+
+alert("Title aur Notice likho.");
+return;
+
+}
+
+const data={
+title,
+text,
+image,
+date:today()
+};
+
+const ref=await addDoc(
+collection(db,"notices"),
+data
+);
+
+notices.push({
+docId:ref.id,
+...data
+});
+
+document.getElementById("noticeTitle").value="";
+document.getElementById("noticeText").value="";
+document.getElementById("noticeImage").value="";
+
+displayNotices("noticeList");
+displayNotices("dashboardNotices");
+
+alert("📢 Notice published.");
+
+};
+
+
+function displayNotices(id){
+
+const box=document.getElementById(id);
+
+if(!box)return;
+
+box.innerHTML="";
+
+notices.forEach(n=>{
+
+box.innerHTML+=`
+
+<div class="notice">
+
+<h3>📢 ${n.title}</h3>
+
+<small>${n.date}</small>
+
+<p>${n.text}</p>
+
+${n.image?
+`<img src="${n.image}">`
+:""}
+
+${currentUser==="principal"&&id==="noticeList"?
+
+`<br>
+<button class="delete"
+onclick="deleteNotice('${n.docId}')">
+🗑 Delete
+</button>`
+:""}
+
+</div>
+
+`;
+
+});
+
+}
+
+
+window.deleteNotice=async function(id){
+
+if(!confirm("Notice delete karna hai?"))return;
+
+await deleteDoc(doc(db,"notices",id));
+
+notices=notices.filter(n=>n.docId!==id);
+
+displayNotices("noticeList");
+displayNotices("dashboardNotices");
+
+};
+
+
+/* ================= DASHBOARD ================= */
 
 function updateDashboard(){
 
-document.getElementById(
-"studentCount"
-).innerText=
+document.getElementById("studentCount").innerText=
 students.length;
 
-document.getElementById(
-"teacherCount"
-).innerText=
+document.getElementById("teacherCount").innerText=
 teachers.length;
 
-
-const today=
-todayDate();
-
-
-const present=
-attendance.filter(
-a=>
-a.date===
-today&&
-a.status===
-"Present"
+document.getElementById("presentCount").innerText=
+attendance.filter(a=>
+a.date===today()&&a.status==="Present"
 ).length;
 
 
-document.getElementById(
-"presentCount"
-).innerText=
-present;
+let dues=0;
 
+students.forEach(s=>{
+dues+=getFeeStats(s.id).remaining;
+});
 
-const dues=
-fees.reduce(
-(sum,f)=>
-sum+
-Number(f.remaining||0),
-0
-);
-
-
-document.getElementById(
-"pendingFees"
-).innerText=
+document.getElementById("duesCount").innerText=
 "₹"+dues;
 
 }
 
 
-document.getElementById(
-"password"
-).addEventListener(
-"keydown",
-function(e){
+/*
+Date automatic update.
+10 तारीख के बाद app open/login होने पर
+pending monthly fee calculation check होगी.
+*/
 
-if(e.key==="Enter")
-login();
+setInterval(async()=>{
 
-}
-);
+setDates();
 
+if(currentUser){
 
-window.addEventListener(
-"focus",
-function(){
+await processMonthlyFees();
 
-setToday();
-
-}
-);
-
-
-setInterval(
-function(){
-
-setToday();
-
-displayAttendance();
-
+displayFeeStatus();
 updateDashboard();
 
-},
-60000
-);
+}
+
+},60000);
 
 
-setToday();
+/* ================= START ================= */
 
 </script>
 
